@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:guideTemplate/screens/home.dart';
+import 'package:guideTemplate/screens/privacy_policy.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
+import 'package:guideTemplate/utils/tools.dart';
 
 var routes = <String, WidgetBuilder>{
-  "/home": (BuildContext context) => HomeScreen()
+  "/home": (BuildContext context) => HomeScreen(),
+  "/privacy": (BuildContext context) => Privacy(),
+  "/articles": (BuildContext context) => Privacy(),
 };
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+  ));
   WidgetsFlutterBinding.ensureInitialized();
   AdsHelper.initFacebookAds();
-  runApp(MyApp());
+  Tools.getAppInfo().then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Guide',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.blueGrey,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Montserrat'),
       routes: routes,
       home: HomeScreen(),
     );

@@ -8,18 +8,18 @@ class AdsHelper {
 
   //===================================> Facebook Ads:
   //FB Banner
-  static String fbBannerId_1 = '3128195607198965_3128266117191914';
-  static String fbBannerId_2 = '3128195607198965_3131196756898850';
+  static String fbBannerId_1 = '2964537240339084_2964556847003790';
+  static String fbBannerId_2 = '2964537240339084_2964646123661529';
 
   //FB Inter
-  static String fbInterId_1 = '3128195607198965_3130888846929641';
-  static String fbInterId_2 = '3128195607198965_3131231876895338';
+  static String fbInterId_1 = '2964537240339084_2964646746994800';
+  static String fbInterId_2 = '2964537240339084_2964647196994755';
 
   //FB Native Banner
-  static String fbNativeBannerId = '3128195607198965_3331361980215659';
+  static String fbNativeBannerId = '2964537240339084_2964649440327864';
 
   //FB Native
-  static String fbNativeId = '3128195607198965_3331362690215588';
+  static String fbNativeId = '2964537240339084_2964651180327690';
 
   static int adsFrequency = 50;
   bool _isInterstitialAdLoaded = false;
@@ -29,13 +29,11 @@ class AdsHelper {
   Widget fbNativeAd;
   FacebookInterstitialAd fbInter;
 
-
   static void initFacebookAds() {
     FacebookAudienceNetwork.init(
       testingId: AdsHelper.testingId,
     );
   }
-
 
   loadFbInter(String fbInterId) {
     FacebookInterstitialAd.loadInterstitialAd(
@@ -59,8 +57,9 @@ class AdsHelper {
     if (_isInterstitialAdLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd(delay: delay);
       print('===========(Fb Inter Showen)===========> :D');
-    } else{
-      print("================(in show fb Inter)=========> Interstial Ad not yet loaded!");
+    } else {
+      print(
+          "================(in show fb Inter)=========> Interstial Ad not yet loaded!");
     }
   }
 
@@ -68,7 +67,7 @@ class AdsHelper {
     Random r = new Random();
     double falseProbability = (100 - probablity) / 100;
     bool result = r.nextDouble() > falseProbability;
-    if(result) {
+    if (result) {
       showFbInter(delay);
     }
     print('====================> Probablity of $probablity% return $result');
@@ -100,10 +99,10 @@ class AdsHelper {
           adType: NativeAdType.NATIVE_BANNER_AD,
           bannerAdSize: size,
           width: double.infinity,
-          backgroundColor: MyColors.primary,
-          titleColor: MyColors.darklight["dark"],
-          descriptionColor: MyColors.darklight["dark"],
-          buttonColor: MyColors.secondary,
+          backgroundColor: MyColors.grey2.withOpacity(0.8),
+          titleColor: MyColors.black,
+          descriptionColor: MyColors.black,
+          buttonColor: MyColors.black,
           buttonTitleColor: Colors.white,
           buttonBorderColor: Colors.white,
           listener: (result, value) {
@@ -124,10 +123,10 @@ class AdsHelper {
           adType: NativeAdType.NATIVE_AD,
           width: double.infinity,
           height: size,
-          backgroundColor: MyColors.primary,
+          backgroundColor: MyColors.white,
           titleColor: MyColors.darklight["dark"],
           descriptionColor: MyColors.darklight["dark"],
-          buttonColor: MyColors.secondary,
+          buttonColor: MyColors.black,
           buttonTitleColor: Colors.white,
           buttonBorderColor: Colors.white,
           listener: (result, value) {
