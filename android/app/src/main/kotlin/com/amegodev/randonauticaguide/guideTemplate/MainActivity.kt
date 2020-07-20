@@ -1,4 +1,4 @@
-package com.amegodev.randonauticaguide.guideTemplate
+package com.amegodev.randonauticaguide
 
 import io.flutter.embedding.android.FlutterActivity
 
