@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/theme.dart';
 
 class AdsHelper {
-  static String testingId = '49561229-6006-416f-a4e5-8ff12965dd02';
+//  My Raal Device
+//  static String testingId = '49561229-6006-416f-a4e5-8ff12965dd02';
+
+  //AVD
+  static String testingId = 'ea693ea7-9881-48ff-8bd2-ec06afb03136';
 
   //===================================> Facebook Ads:
   //FB Banner
@@ -123,9 +127,9 @@ class AdsHelper {
           adType: NativeAdType.NATIVE_AD,
           width: double.infinity,
           height: size,
-          backgroundColor: MyColors.white,
-          titleColor: MyColors.darklight["dark"],
-          descriptionColor: MyColors.darklight["dark"],
+          backgroundColor: MyColors.grey2,
+          titleColor: Colors.black,
+          descriptionColor: Colors.black,
           buttonColor: MyColors.black,
           buttonTitleColor: Colors.white,
           buttonBorderColor: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:guideTemplate/screens/articles_list.dart';
 import 'package:guideTemplate/screens/home.dart';
 import 'package:guideTemplate/screens/privacy_policy.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
@@ -7,8 +8,8 @@ import 'package:guideTemplate/utils/tools.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
-  "/privacy": (BuildContext context) => Privacy(),
-  "/articles": (BuildContext context) => Privacy(),
+  "/privacy": (BuildContext context) => PrivacyScreen(),
+  "/articles": (BuildContext context) => ArticlesScreen(),
 };
 
 void main() {

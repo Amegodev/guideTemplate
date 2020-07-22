@@ -1,36 +1,37 @@
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
 import 'package:guideTemplate/utils/strings.dart';
 import 'package:guideTemplate/utils/theme.dart';
-import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
 import 'package:guideTemplate/widgets/widgets.dart';
 
-class Privacy extends StatefulWidget {
+class PrivacyScreen extends StatefulWidget {
   @override
-  _PrivacyState createState() => _PrivacyState();
+  _PrivacyScreenState createState() => _PrivacyScreenState();
 }
 
-class _PrivacyState extends State<Privacy> {
+class _PrivacyScreenState extends State<PrivacyScreen> {
   AdsHelper ads;
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
   @override
   void initState() {
     super.initState();
     ads = new AdsHelper();
+    ads.loadFbInter(AdsHelper.fbInterId_1);
+  }
+
+  @override
+  void dispose() {
+    ads.disposeAllAds();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark));
-
-    GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
     return Scaffold(
       key: scaffoldKey,
@@ -59,12 +60,12 @@ class _PrivacyState extends State<Privacy> {
                       AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
                 ),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Html(
-                      data: Strings.privacyTaxt,
-                      onLinkTap: (url) {
-                        print("Opening $url");
-                      },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: HtmlWidget(
+                        Strings.privacyText,
+                      ),
                     ),
                   ),
                 ),

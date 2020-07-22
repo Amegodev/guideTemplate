@@ -7,19 +7,18 @@ class Strings {
   static final String about = "About";
   static final String privacy = "Privacy Policy";
   static final String storeId = "";
-  static final String storeName = "AmegoDev";
-  static final String aboutText = """
-    Guide App
+  static final String storeName = "HVKIW";
+  static final String aboutText = """Randonautica explained: what it is and how to use it\nHere's everything you need to know about one of the most popular apps right now
   """;
-  static final String privacyTaxt = """
+  static final String privacyText = """
         <strong>Privacy Policy</strong>
-    <p> AmegoDev built the WhatsApp Stickers app as a Free app. This SERVICE is provided by AmegoDev at no cost and is intended for use as is.
+    <p> HVKIW built the ${Tools.packageInfo.appName} app as a Free app. This SERVICE is provided by HVKIW at no cost and is intended for use as is.
     </p>
     <p> This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
     </p>
     <p> If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
     </p>
-    <p> The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at WhatsApp Stickers unless otherwise defined in this Privacy Policy.
+    <p> The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at ${Tools.packageInfo.appName} unless otherwise defined in this Privacy Policy.
     </p>
     <p><strong>Information Collection and Use</strong></p>
     <p> For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information. The information that we request will be retained by us and used as described in this privacy policy.
@@ -31,13 +30,11 @@ class Strings {
             Link to privacy policy of third party service providers used by the app
         </p>
         <ul>
-            <li><a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google Play
-                    Services</a></li>
+            <li><a href="https://www.google.com/policies/privacy/">Google Play Services</a></li>
             <!---->
             <!---->
             <!---->
-            <li><a href="https://www.facebook.com/about/privacy/update/printable" target="_blank"
-                    rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="https://www.facebook.com/about/privacy/update/printable">Facebook</a></li>
             <!---->
         </ul>
     </div>
@@ -71,8 +68,7 @@ class Strings {
     </p>
     <p>This policy is effective as of 2020-07-12</p>
     <p><strong>Contact Us</strong></p>
-    <p> If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:amgos@live.com?subject=from ${Tools.packageInfo.appName}">amgos@live.com</a>.
+    <p> If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:amgos@live.com?subject=from ${Tools.packageInfo.appName} (${Tools.packageInfo.packageName})">amgos@live.com</a>.
     </p>
-'''
   """;
 }

@@ -6,7 +6,7 @@ class MyNavigator {
   }
 
   static void goArticles(BuildContext context) {
-    Navigator.pushNamed(context, '/about');
+    Navigator.pushNamed(context, '/articles');
   }
 
   static void goAbout(BuildContext context) {

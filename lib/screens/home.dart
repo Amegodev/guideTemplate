@@ -1,5 +1,6 @@
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
+import 'package:guideTemplate/screens/next_screen.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
 import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/strings.dart';
@@ -52,7 +53,23 @@ class _HomeScreeState extends State<HomeScreen> {
                     style: MyTextStyles.bigTitle,
                   ),
                   svgIcon: 'assets/icons/articles.svg',
-                  onClicked: () {},
+                  onClicked: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                      return NextScreen(
+                        widget: MainButton(
+                          title: Text(
+                            'Go to articles',
+                            style: MyTextStyles.bigTitle,
+                          ),
+                          bgColor: MyColors.grey1,
+                          svgIcon: 'assets/icons/articles.svg',
+                          onClicked: () {
+                            MyNavigator.goArticles(context);
+                          },
+                        ),
+                      );
+                    }));
+                  },
                 ),
                 MainButton(
                   title: Text(
@@ -60,15 +77,9 @@ class _HomeScreeState extends State<HomeScreen> {
                     style: MyTextStyles.bigTitle,
                   ),
                   svgIcon: 'assets/icons/more_apps.svg',
-                  onClicked: () {},
-                ),
-                MainButton(
-                  title: Text(
-                    'Notifications',
-                    style: MyTextStyles.bigTitle,
-                  ),
-                  svgIcon: 'assets/icons/notif.svg',
-                  onClicked: () {},
+                  onClicked: () {
+                    Tools.launchURLMore();
+                  },
                 ),
                 MainButton(
                   title: Text(
@@ -79,6 +90,14 @@ class _HomeScreeState extends State<HomeScreen> {
                   onClicked: () {
                     MyNavigator.goPrivacy(context);
                   },
+                ),
+                MainButton(
+                  title: Text(
+                    'Notifications',
+                    style: MyTextStyles.bigTitle,
+                  ),
+                  svgIcon: 'assets/icons/notif.svg',
+                  onClicked: () {},
                 ),
               ],
             ),
