@@ -1,7 +1,6 @@
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
-import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
@@ -25,7 +24,7 @@ class _NextScreenState extends State<NextScreen> {
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_1);
+    ads.loadFbInter(AdsHelper.fbInterId_2);
     customDrawer = new CustomDrawer(() => ads.showInter());
   }
 
@@ -34,6 +33,7 @@ class _NextScreenState extends State<NextScreen> {
     ads.disposeAllAds();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +45,7 @@ class _NextScreenState extends State<NextScreen> {
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+                AdsHelper.fbNativeBannerId2, NativeBannerAdSize.HEIGHT_50),
             onClicked: () => ads.showInter(),
           ),
           widget.widget,

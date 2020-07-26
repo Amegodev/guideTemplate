@@ -51,16 +51,15 @@ class _ArticleScreenState extends State<ArticleScreen> {
               scaffoldKey: scaffoldKey,
               title: Tools.packageInfo.appName,
               ads: ads.getFbNativeBanner(
-                  AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+                  AdsHelper.fbNativeBannerId1, NativeBannerAdSize.HEIGHT_50),
               onClicked: () => ads.showInter(),
             ),
             Container(
               padding: EdgeInsets.all(8.0),
               margin: EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: MyColors.grey2,
-                borderRadius: BorderRadius.circular(15.0)
-              ),
+                  color: MyColors.grey2,
+                  borderRadius: BorderRadius.circular(15.0)),
               child: Text(
                 Articles.titles[widget.index],
                 style: MyTextStyles.bigTitle,

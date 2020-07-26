@@ -44,7 +44,7 @@ class _HomeScreeState extends State<HomeScreen> {
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+                AdsHelper.fbNativeBannerId1, NativeBannerAdSize.HEIGHT_50),
             onClicked: () => ads.showInter(),
           ),
           Expanded(
@@ -117,7 +117,8 @@ class _HomeScreeState extends State<HomeScreen> {
                         ),
                       );
                     }
-                    if(count != null && count <= 3) ads.showInter(probablity: 80);
+                    if (count != null && count <= 3)
+                      ads.showInter(probablity: 80);
                   },
                 ),
                 /*MainButton(

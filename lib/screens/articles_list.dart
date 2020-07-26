@@ -44,7 +44,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+                AdsHelper.fbNativeBannerId1, NativeBannerAdSize.HEIGHT_50),
             onClicked: () => ads.showInter(),
           ),
           Expanded(
@@ -60,8 +60,11 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         svgIcon: 'assets/icons/articles.svg',
                         onClicked: () {
                           ads.showInter(probablity: 80);
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                            return ArticleScreen(index: index,);
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return ArticleScreen(
+                              index: index,
+                            );
                           }));
                         },
                       )

@@ -11,7 +11,8 @@ class CustomAppBar extends StatelessWidget {
   final Widget ads;
   final VoidCallback onClicked;
 
-  const CustomAppBar({Key key, this.scaffoldKey, this.ads, this.title, this.onClicked})
+  const CustomAppBar(
+      {Key key, this.scaffoldKey, this.ads, this.title, this.onClicked})
       : super(key: key);
 
   @override
@@ -58,7 +59,7 @@ class CustomAppBar extends StatelessWidget {
                       int count = await showDialog(
                           context: context, builder: (_) => RatingDialog());
                       String text = '';
-                      if(count != null){
+                      if (count != null) {
                         if (count <= 2)
                           text = 'Your rating was $count ☹ alright, thank you.';
                         if (count == 3) text = 'Thanks for your rating 🙂';
@@ -69,7 +70,7 @@ class CustomAppBar extends StatelessWidget {
                           ),
                         );
                       }
-                      if(count != null && count <= 3) this.onClicked();
+                      if (count != null && count <= 3) this.onClicked();
                     },
                   ),
                 ],
@@ -199,8 +200,8 @@ class _RatingDialogState extends State<RatingDialog> {
   Widget _buildStar(int starCount) {
     return InkWell(
       child: Icon(
-        Icons.star,
-        // size: 30.0,
+        _stars >= starCount ? Icons.star : Icons.star_border,
+        size: 30.0,
         color: _stars >= starCount ? Colors.orange : Colors.grey,
       ),
       onTap: () {
@@ -229,7 +230,9 @@ class _RatingDialogState extends State<RatingDialog> {
                   width: 80,
                   child: Image.asset('assets/icon.png'),
                 ),
-                SizedBox(width: 10.0,),
+                SizedBox(
+                  width: 10.0,
+                ),
                 Expanded(
                     child: Text(
                   Tools.packageInfo.appName,
@@ -237,9 +240,19 @@ class _RatingDialogState extends State<RatingDialog> {
                 ))
               ],
             ),
-            SizedBox(height: 20.0,),
-            Text(Strings.aboutText,),
-            Text('👇 Please Rate Us 👇', textAlign: TextAlign.center, style: MyTextStyles.title,),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              Strings.aboutText,
+              textAlign: TextAlign.center,
+              style: MyTextStyles.subTitle,
+            ),
+            Text(
+              '👇 Please Rate Us 👇',
+              textAlign: TextAlign.center,
+              style: MyTextStyles.subTitle,
+            ),
           ],
         ),
       ),

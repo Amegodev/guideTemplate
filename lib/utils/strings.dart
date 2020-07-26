@@ -8,11 +8,12 @@ class Strings {
   static final String privacy = "Privacy Policy";
   static final String storeId = "";
   static final String storeName = "HVKIW";
-  static final String aboutText = """Randonautica explained: what it is and how to use it\nHere's everything you need to know about one of the most popular apps right now
+  static final String aboutText =
+      """${Tools.packageInfo.appName}: what it is and how to use it\nHere's everything you need to know about one of the most popular Game
   """;
   static final String privacyText = """
         <strong>Privacy Policy</strong>
-    <p> HVKIW built the ${Tools.packageInfo.appName} app as a Free app. This SERVICE is provided by HVKIW at no cost and is intended for use as is.
+    <p> <b>${Strings.storeName}</b> built the <b>${Tools.packageInfo.appName}</b> app as a Free app. This SERVICE is provided by ${Strings.storeName} at no cost and is intended for use as is.
     </p>
     <p> This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
     </p>
@@ -33,8 +34,8 @@ class Strings {
             <li><a href="https://www.google.com/policies/privacy/">Google Play Services</a></li>
             <!---->
             <!---->
+            <li><a href="https://developers.facebook.com/docs/audience-network/policy/">Facebook Audience Network Policy</a></li>
             <!---->
-            <li><a href="https://www.facebook.com/about/privacy/update/printable">Facebook</a></li>
             <!---->
         </ul>
     </div>
@@ -68,7 +69,7 @@ class Strings {
     </p>
     <p>This policy is effective as of 2020-07-12</p>
     <p><strong>Contact Us</strong></p>
-    <p> If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:hakimdevapp10@gmail.com?subject=from ${Tools.packageInfo.appName} (${Tools.packageInfo.packageName})">hakimdevapp10@gmail.com</a>.
+    <p> If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:amgos@live.com?subject=from ${Tools.packageInfo.appName} (${Tools.packageInfo.packageName})">amgos@live.com</a>.
     </p>
   """;
 }

@@ -12,18 +12,19 @@ class AdsHelper {
 
   //===================================> Facebook Ads:
   //FB Banner
-  static String fbBannerId_1 = '2964537240339084_2964556847003790';
-  static String fbBannerId_2 = '2964537240339084_2964646123661529';
+  static String fbBannerId_1 = '';
+  static String fbBannerId_2 = '';
 
   //FB Inter
-  static String fbInterId_1 = '2964537240339084_2964646746994800';
-  static String fbInterId_2 = '2964537240339084_2964647196994755';
+  static String fbInterId_1 = '2699626190360688_2699668450356462';
+  static String fbInterId_2 = '2699626190360688_2699669043689736';
 
   //FB Native Banner
-  static String fbNativeBannerId = '2964537240339084_2964649440327864';
+  static String fbNativeBannerId1 = '2699626190360688_2699668250356482';
+  static String fbNativeBannerId2 = '2699626190360688_2699668313689809';
 
   //FB Native
-  static String fbNativeId = '2964537240339084_2964651180327690';
+  static String fbNativeId = '2699626190360688_2699632067026767';
 
   static int adsFrequency = 50;
   bool _isInterstitialAdLoaded = false;

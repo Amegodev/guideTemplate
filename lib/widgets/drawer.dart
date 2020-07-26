@@ -9,8 +9,8 @@ import 'package:guideTemplate/widgets/widgets.dart';
 class CustomDrawer {
   final VoidCallback onClicked;
 
- CustomDrawer(this.onClicked);
- Drawer buildDrawer(BuildContext context) {
+  CustomDrawer(this.onClicked);
+  Drawer buildDrawer(BuildContext context) {
     return Drawer(
       child: Container(
         color: MyColors.white,
@@ -185,7 +185,7 @@ class CustomDrawer {
                         onPressed: () async {
                           Navigator.pop(context);
                           this.onClicked();
-                          int count = await showDialog(
+                          await showDialog(
                               context: context, builder: (_) => RatingDialog());
                         },
                         child: Row(

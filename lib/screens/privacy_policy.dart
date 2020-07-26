@@ -22,7 +22,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_1);
+    ads.loadFbInter(AdsHelper.fbInterId_2);
     customDrawer = new CustomDrawer(() => ads.showInter());
   }
 
@@ -34,7 +34,6 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: scaffoldKey,
       drawer: customDrawer.buildDrawer(context),
@@ -58,8 +57,8 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 CustomAppBar(
                   scaffoldKey: scaffoldKey,
                   title: Strings.privacy,
-                  ads: ads.getFbNativeBanner(
-                      AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+                  ads: ads.getFbNativeBanner(AdsHelper.fbNativeBannerId2,
+                      NativeBannerAdSize.HEIGHT_50),
                   onClicked: () => ads.showInter(),
                 ),
                 Expanded(
@@ -76,8 +75,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 MainButton(
                   title: Text(
                     'Return',
-                    style: MyTextStyles.bigTitle
-                        .apply(color: MyColors.white),
+                    style: MyTextStyles.bigTitle.apply(color: MyColors.white),
                   ),
                   svgIcon: 'assets/icons/back.svg',
                   bgColor: MyColors.grey3,
