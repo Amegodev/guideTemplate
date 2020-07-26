@@ -1,3 +1,4 @@
+import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
 import 'package:guideTemplate/utils/navigator.dart';
@@ -17,6 +18,7 @@ class NextScreen extends StatefulWidget {
 
 class _NextScreenState extends State<NextScreen> {
   AdsHelper ads;
+  CustomDrawer customDrawer;
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
   @override
@@ -24,6 +26,7 @@ class _NextScreenState extends State<NextScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
+    customDrawer = new CustomDrawer(() => ads.showInter());
   }
 
   @override
@@ -35,12 +38,15 @@ class _NextScreenState extends State<NextScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: CustomDrawer.buildDrawer(context),
+      drawer: customDrawer.buildDrawer(context),
       body: Column(
         children: <Widget>[
           CustomAppBar(
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
+            ads: ads.getFbNativeBanner(
+                AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+            onClicked: () => ads.showInter(),
           ),
           widget.widget,
           MainButton(
@@ -49,7 +55,10 @@ class _NextScreenState extends State<NextScreen> {
               style: MyTextStyles.bigTitle,
             ),
             svgIcon: 'assets/icons/home.svg',
-            onClicked: () => MyNavigator.goHome(context),
+            onClicked: () {
+              ads.showInter(probablity: 80);
+              Navigator.pop(context);
+            },
           ),
           MainButton(
             title: Text(
@@ -59,7 +68,10 @@ class _NextScreenState extends State<NextScreen> {
             svgIcon: 'assets/icons/back.svg',
             bgColor: MyColors.grey3,
             textColor: MyColors.white,
-            onClicked: () => Navigator.pop(context),
+            onClicked: () {
+              ads.showInter(probablity: 80);
+              Navigator.pop(context);
+            },
           ),
           Expanded(
             child: Container(

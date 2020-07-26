@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:guideTemplate/utils/navigator.dart';
@@ -8,7 +7,10 @@ import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/widgets.dart';
 
 class CustomDrawer {
-  static Drawer buildDrawer(BuildContext context) {
+  final VoidCallback onClicked;
+
+ CustomDrawer(this.onClicked);
+ Drawer buildDrawer(BuildContext context) {
     return Drawer(
       child: Container(
         color: MyColors.white,
@@ -54,6 +56,7 @@ class CustomDrawer {
                           borderRadius: new BorderRadius.circular(100.0),
                         ),
                         onPressed: () {
+                          this.onClicked();
                           MyNavigator.goHome(context);
                         },
                         child: Row(
@@ -148,6 +151,7 @@ class CustomDrawer {
                         ),
                         onPressed: () {
                           Navigator.pop(context);
+                          this.onClicked();
                           MyNavigator.goPrivacy(context);
                         },
                         child: Row(
@@ -180,6 +184,7 @@ class CustomDrawer {
                         ),
                         onPressed: () async {
                           Navigator.pop(context);
+                          this.onClicked();
                           int count = await showDialog(
                               context: context, builder: (_) => RatingDialog());
                         },

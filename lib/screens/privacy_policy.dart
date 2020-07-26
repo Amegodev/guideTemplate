@@ -15,6 +15,7 @@ class PrivacyScreen extends StatefulWidget {
 
 class _PrivacyScreenState extends State<PrivacyScreen> {
   AdsHelper ads;
+  CustomDrawer customDrawer;
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
   @override
@@ -22,6 +23,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
+    customDrawer = new CustomDrawer(() => ads.showInter());
   }
 
   @override
@@ -35,7 +37,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
     return Scaffold(
       key: scaffoldKey,
-      drawer: CustomDrawer.buildDrawer(context),
+      drawer: customDrawer.buildDrawer(context),
       backgroundColor: MyColors.grey1,
       body: Stack(
         children: <Widget>[
@@ -58,17 +60,33 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   title: Strings.privacy,
                   ads: ads.getFbNativeBanner(
                       AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+                  onClicked: () => ads.showInter(),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: SingleChildScrollView(
                       child: HtmlWidget(
                         Strings.privacyText,
+                        textStyle: TextStyle(fontSize: 18.0),
                       ),
                     ),
                   ),
                 ),
+                MainButton(
+                  title: Text(
+                    'Return',
+                    style: MyTextStyles.bigTitle
+                        .apply(color: MyColors.white),
+                  ),
+                  svgIcon: 'assets/icons/back.svg',
+                  bgColor: MyColors.grey3,
+                  textColor: MyColors.white,
+                  onClicked: () {
+                    ads.showInter(probablity: 80);
+                    Navigator.pop(context);
+                  },
+                )
               ],
             ),
           ),

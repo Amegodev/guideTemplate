@@ -9,8 +9,9 @@ class CustomAppBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String title;
   final Widget ads;
+  final VoidCallback onClicked;
 
-  const CustomAppBar({Key key, this.scaffoldKey, this.ads, this.title})
+  const CustomAppBar({Key key, this.scaffoldKey, this.ads, this.title, this.onClicked})
       : super(key: key);
 
   @override
@@ -68,6 +69,7 @@ class CustomAppBar extends StatelessWidget {
                           ),
                         );
                       }
+                      if(count != null && count <= 3) this.onClicked();
                     },
                   ),
                 ],
@@ -254,7 +256,9 @@ class _RatingDialogState extends State<RatingDialog> {
       actions: <Widget>[
         FlatButton(
           child: Text('CANCEL'),
-          onPressed: Navigator.of(context).pop,
+          onPressed: () {
+            Navigator.of(context).pop(0);
+          },
         ),
         FlatButton(
           child: Text('OK'),
