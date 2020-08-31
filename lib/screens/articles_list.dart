@@ -16,6 +16,7 @@ class ArticlesScreen extends StatefulWidget {
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
   AdsHelper ads;
+  CustomDrawer customDrawer;
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
   @override
@@ -23,6 +24,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
+    customDrawer = new CustomDrawer(() => ads.showInter());
   }
 
   @override
@@ -35,7 +37,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: CustomDrawer.buildDrawer(context),
+      drawer: customDrawer.buildDrawer(context),
       body: Column(
         children: <Widget>[
           CustomAppBar(
@@ -43,6 +45,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
                 AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+            onClicked: () => ads.showInter(),
           ),
           Expanded(
             child: ListView.builder(
@@ -56,6 +59,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         ),
                         svgIcon: 'assets/icons/articles.svg',
                         onClicked: () {
+                          ads.showInter(probablity: 80);
                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
                             return ArticleScreen(index: index,);
                           }));
@@ -70,7 +74,10 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         svgIcon: 'assets/icons/back.svg',
                         bgColor: MyColors.grey3,
                         textColor: MyColors.white,
-                        onClicked: () => Navigator.pop(context),
+                        onClicked: () {
+                          ads.showInter(probablity: 80);
+                          Navigator.pop(context);
+                        },
                       );
               },
             ),

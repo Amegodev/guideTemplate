@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreeState extends State<HomeScreen> {
   AdsHelper ads;
+  CustomDrawer customDrawer;
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
   @override
@@ -23,6 +24,7 @@ class _HomeScreeState extends State<HomeScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
+    customDrawer = new CustomDrawer(() => ads.showInter());
   }
 
   @override
@@ -35,7 +37,7 @@ class _HomeScreeState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: CustomDrawer.buildDrawer(context),
+      drawer: customDrawer.buildDrawer(context),
       body: Column(
         children: <Widget>[
           CustomAppBar(
@@ -43,6 +45,7 @@ class _HomeScreeState extends State<HomeScreen> {
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
                 AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
+            onClicked: () => ads.showInter(),
           ),
           Expanded(
             child: ListView(
@@ -54,7 +57,8 @@ class _HomeScreeState extends State<HomeScreen> {
                   ),
                   svgIcon: 'assets/icons/articles.svg',
                   onClicked: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
                       return NextScreen(
                         widget: MainButton(
                           title: Text(
@@ -88,17 +92,44 @@ class _HomeScreeState extends State<HomeScreen> {
                   ),
                   svgIcon: 'assets/icons/privacy_policy.svg',
                   onClicked: () {
+                    ads.showInter(probablity: 80);
                     MyNavigator.goPrivacy(context);
                   },
                 ),
                 MainButton(
                   title: Text(
+                    'About',
+                    style: MyTextStyles.bigTitle,
+                  ),
+                  svgIcon: 'assets/icons/about.svg',
+                  onClicked: () async {
+                    int count = await showDialog(
+                        context: context, builder: (_) => RatingDialog());
+                    String text = '';
+                    if (count != null) {
+                      if (count <= 2)
+                        text = 'Your rating was $count ☹ alright, thank you.';
+                      if (count == 3) text = 'Thanks for your rating 🙂';
+                      if (count >= 4) text = 'Thanks for your rating 😀';
+                      scaffoldKey.currentState.showSnackBar(
+                        new SnackBar(
+                          content: Text(text),
+                        ),
+                      );
+                    }
+                    if(count != null && count <= 3) ads.showInter(probablity: 80);
+                  },
+                ),
+                /*MainButton(
+                  title: Text(
                     'Notifications',
                     style: MyTextStyles.bigTitle,
                   ),
                   svgIcon: 'assets/icons/notif.svg',
-                  onClicked: () {},
-                ),
+                  onClicked: () {
+                    ads.showInter(probablity: 80);
+                  },
+                ),*/
               ],
             ),
           ),

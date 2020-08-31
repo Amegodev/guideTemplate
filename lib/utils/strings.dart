@@ -68,7 +68,7 @@ class Strings {
     </p>
     <p>This policy is effective as of 2020-07-12</p>
     <p><strong>Contact Us</strong></p>
-    <p> If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:amgos@live.com?subject=from ${Tools.packageInfo.appName} (${Tools.packageInfo.packageName})">amgos@live.com</a>.
+    <p> If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:hakimdevapp10@gmail.com?subject=from ${Tools.packageInfo.appName} (${Tools.packageInfo.packageName})">hakimdevapp10@gmail.com</a>.
     </p>
   """;
 }

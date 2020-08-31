@@ -1,4 +1,4 @@
-package com.hvkiw.randonauticaguide
+package com.qooapp.qootipswiki
 
 import io.flutter.embedding.android.FlutterActivity
 
