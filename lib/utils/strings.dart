@@ -6,10 +6,35 @@ class Strings {
   static final String more = "More Apps";
   static final String about = "About";
   static final String privacy = "Privacy Policy";
-  static final String storeId = "";
-  static final String storeName = "HVKIW";
-  static final String aboutText = """Randonautica explained: what it is and how to use it\nHere's everything you need to know about one of the most popular apps right now
+  static final String storeId = "6351844879181348391";
+  static final String storeName = "Karim StoreApps";
+  static final String aboutText = """QooApp Walkthough : what it is and how to use it\nHere's everything you need to know about one of the most popular apps right now
   """;
+  static final String ratingText = """We need your support 🤗""";
+  static final List<String> servers = [
+    "🇬🇧 • United-Kingdom",
+    "🇨🇦 • Canada",
+    "🇨🇳 • China",
+    "🇪🇸 • Spain",
+    "🇦🇹 • Austria",
+    "🇦🇺 • Australia",
+    "🇧🇷 • Brazil",
+    "🇨🇴 • Colombia",
+    "🇨🇷 • Costa-Rica",
+    "🇩🇪 • Germany",
+    "🇩🇰 • Denmark",
+    "🇪🇸 • Spain",
+    "🇪🇺 • Europe",
+    "🇫🇷 • France",
+    "🇬🇷 • Greece",
+    "🇮🇹 • Italy",
+    "🇮🇳 • India",
+    "🇯🇵 • Japan",
+    "🇰🇷 • South-Korea",
+    "🇲🇽 • Mexico",
+    "🇵🇦 • Panama"
+  ];
+
   static final String privacyText = """
         <strong>Privacy Policy</strong>
     <p> HVKIW built the ${Tools.packageInfo.appName} app as a Free app. This SERVICE is provided by HVKIW at no cost and is intended for use as is.

@@ -4,13 +4,15 @@ import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/strings.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
-import 'package:guideTemplate/widgets/widgets.dart';
+import 'package:guideTemplate/widgets/dialogs.dart';
 
 class CustomDrawer {
   final VoidCallback onClicked;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
- CustomDrawer(this.onClicked);
- Drawer buildDrawer(BuildContext context) {
+  CustomDrawer(this.onClicked, this.scaffoldKey);
+
+  Drawer buildDrawer(BuildContext context) {
     return Drawer(
       child: Container(
         color: MyColors.white,
@@ -33,14 +35,14 @@ class CustomDrawer {
                     Tools.packageInfo == null
                         ? SizedBox()
                         : Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: 20.0, top: 20.0),
-                            child: Text(
-                              Tools.packageInfo.appName,
-                              style: MyTextStyles.bigTitle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
+                      padding:
+                      const EdgeInsets.only(bottom: 20.0, top: 20.0),
+                      child: Text(
+                        Tools.packageInfo.appName,
+                        style: MyTextStyles.bigTitle,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -183,10 +185,27 @@ class CustomDrawer {
                           borderRadius: new BorderRadius.circular(100.0),
                         ),
                         onPressed: () async {
-                          Navigator.pop(context);
-                          this.onClicked();
-                          int count = await showDialog(
-                              context: context, builder: (_) => RatingDialog());
+                          showDialog(
+                              context: context,
+                              builder: (_) => RatingDialog()).then((value) {
+                            if (value == null){
+                              if (onClicked != null) this.onClicked();
+                              return;
+                            }
+                            String text = '';
+                            if (value <= 3) {
+                              if (onClicked != null) this.onClicked();
+                              if (value <= 2)
+                                text = 'Your rating was $value ☹ alright, thank you.';
+                              if (value == 3) text = 'Thanks for your rating 🙂';
+                            } else if (value >= 4)
+                              text = 'Thanks for your rating 😀';
+                            scaffoldKey.currentState.showSnackBar(
+                              new SnackBar(
+                                content: Text(text),
+                              ),
+                            );
+                          });
                         },
                         child: Row(
                           children: <Widget>[

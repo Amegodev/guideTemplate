@@ -1,7 +1,6 @@
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
-import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
@@ -26,7 +25,7 @@ class _NextScreenState extends State<NextScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
-    customDrawer = new CustomDrawer(() => ads.showInter());
+    customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
   }
 
   @override
@@ -45,8 +44,8 @@ class _NextScreenState extends State<NextScreen> {
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(),
+                AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
+            onClicked: () => ads.showInter(probablity: 90),
           ),
           widget.widget,
           MainButton(
@@ -56,7 +55,7 @@ class _NextScreenState extends State<NextScreen> {
             ),
             svgIcon: 'assets/icons/home.svg',
             onClicked: () {
-              ads.showInter(probablity: 80);
+              ads.showInter();
               Navigator.pop(context);
             },
           ),
@@ -69,7 +68,7 @@ class _NextScreenState extends State<NextScreen> {
             bgColor: MyColors.grey3,
             textColor: MyColors.white,
             onClicked: () {
-              ads.showInter(probablity: 80);
+              ads.showInter();
               Navigator.pop(context);
             },
           ),
@@ -83,7 +82,7 @@ class _NextScreenState extends State<NextScreen> {
                 border: Border.all(color: Colors.blue, width: 1.5),
               ),
               child: Center(
-                child: ads.getFbNative(AdsHelper.fbNativeId, double.infinity),
+                child: ads.getFbNative(AdsHelper.fbNativeId, MediaQuery.of(context).size.width, double.infinity),
               ),
             ),
           ),

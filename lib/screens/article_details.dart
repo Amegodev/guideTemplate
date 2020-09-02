@@ -25,8 +25,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_1);
-    customDrawer = new CustomDrawer(() => ads.showInter());
+    ads.loadFbInter(AdsHelper.fbInterId_2);
+    customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
   }
 
   @override
@@ -51,20 +51,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
               scaffoldKey: scaffoldKey,
               title: Tools.packageInfo.appName,
               ads: ads.getFbNativeBanner(
-                  AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
-              onClicked: () => ads.showInter(),
-            ),
-            Container(
-              padding: EdgeInsets.all(8.0),
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: MyColors.grey2,
-                borderRadius: BorderRadius.circular(15.0)
-              ),
-              child: Text(
-                Articles.titles[widget.index],
-                style: MyTextStyles.bigTitle,
-              ),
+                  AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
+              onClicked: () => ads.showInter(probablity: 90),
             ),
             Expanded(
               child: Padding(
@@ -86,7 +74,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
               bgColor: MyColors.grey3,
               textColor: MyColors.white,
               onClicked: () {
-                ads.showInter(probablity: 80);
+                ads.showInter();
                 Navigator.pop(context);
               },
             )

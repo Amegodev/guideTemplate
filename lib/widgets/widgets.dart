@@ -1,23 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:guideTemplate/utils/strings.dart';
 import 'package:guideTemplate/utils/theme.dart';
-import 'package:guideTemplate/utils/tools.dart';
+import 'package:guideTemplate/widgets/dialogs.dart';
 
 class CustomAppBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String title;
   final Widget ads;
+  final Color bgColor;
   final VoidCallback onClicked;
 
-  const CustomAppBar({Key key, this.scaffoldKey, this.ads, this.title, this.onClicked})
+  const CustomAppBar(
+      {Key key, this.scaffoldKey, this.ads, this.title, this.onClicked, this.bgColor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: BoxDecoration(
+        color: this.bgColor == null ? Colors.transparent : this.bgColor,
+      ),
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -55,21 +58,27 @@ class CustomAppBar extends StatelessWidget {
                       ),
                     ),
                     onPressed: () async {
-                      int count = await showDialog(
-                          context: context, builder: (_) => RatingDialog());
-                      String text = '';
-                      if(count != null){
-                        if (count <= 2)
-                          text = 'Your rating was $count ☹ alright, thank you.';
-                        if (count == 3) text = 'Thanks for your rating 🙂';
-                        if (count >= 4) text = 'Thanks for your rating 😀';
+                      showDialog(
+                          context: context,
+                          builder: (_) => RatingDialog()).then((value) {
+                        if (value == null){
+                          if (onClicked != null) this.onClicked();
+                          return;
+                        }
+                        String text = '';
+                        if (value <= 3) {
+                          if (onClicked != null) this.onClicked();
+                          if (value <= 2)
+                            text = 'Your rating was $value ☹ alright, thank you.';
+                          if (value == 3) text = 'Thanks for your rating 🙂';
+                        } else if (value >= 4)
+                          text = 'Thanks for your rating 😀';
                         scaffoldKey.currentState.showSnackBar(
                           new SnackBar(
                             content: Text(text),
                           ),
                         );
-                      }
-                      if(count != null && count <= 3) this.onClicked();
+                      });
                     },
                   ),
                 ],
@@ -187,7 +196,60 @@ class GreyButton extends StatelessWidget {
     );
   }
 }
+class ButtonFilled extends StatelessWidget {
+  final Text title;
+  final Color bgColor;
+  final Function() onClicked;
 
+  const ButtonFilled({Key key, this.title, this.onClicked, this.bgColor})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: this.bgColor == null ? MyColors.black : this.bgColor,
+        borderRadius: BorderRadius.circular(14.0),
+      ),
+      child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        padding: EdgeInsets.all(16.0),
+        onPressed: this.onClicked,
+        child: this.title,
+      ),
+    );
+  }
+}
+
+class ButtonOutlined extends StatelessWidget {
+  final Text title;
+  final Color borderColor;
+  final Function() onClicked;
+
+  const ButtonOutlined({Key key, this.title, this.onClicked, this.borderColor})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14.0),
+          border: Border.all(
+            color:
+            this.borderColor == null ? MyColors.black : this.borderColor,
+            width: 2.0,
+          )),
+      child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        padding: EdgeInsets.all(14.0),
+        onPressed: this.onClicked,
+        child: this.title,
+      ),
+    );
+  }
+}
+
+/*
 class RatingDialog extends StatefulWidget {
   @override
   _RatingDialogState createState() => _RatingDialogState();
@@ -269,4 +331,4 @@ class _RatingDialogState extends State<RatingDialog> {
       ],
     );
   }
-}
+}*/

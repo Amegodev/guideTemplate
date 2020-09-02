@@ -23,7 +23,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
-    customDrawer = new CustomDrawer(() => ads.showInter());
+    customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
   }
 
   @override
@@ -59,8 +59,8 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   scaffoldKey: scaffoldKey,
                   title: Strings.privacy,
                   ads: ads.getFbNativeBanner(
-                      AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
-                  onClicked: () => ads.showInter(),
+                      AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
+                  onClicked: () => ads.showInter(probablity: 90),
                 ),
                 Expanded(
                   child: Padding(

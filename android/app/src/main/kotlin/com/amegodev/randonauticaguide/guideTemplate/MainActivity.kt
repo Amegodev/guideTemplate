@@ -1,4 +1,4 @@
-package com.qooapp.qootipswiki
+package com.qooappwalkthrough.happycheckguide
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -12,18 +12,19 @@ class AdsHelper {
 
   //===================================> Facebook Ads:
   //FB Banner
-  static String fbBannerId_1 = '2964537240339084_2964556847003790';
-  static String fbBannerId_2 = '2964537240339084_2964646123661529';
+  static String fbBannerId_1 = '346832030017630_346837480017085';
+  static String fbBannerId_2 = '346832030017630_346838553350311';
 
   //FB Inter
-  static String fbInterId_1 = '2964537240339084_2964646746994800';
-  static String fbInterId_2 = '2964537240339084_2964647196994755';
+  static String fbInterId_1 = '346832030017630_346838656683634';
+  static String fbInterId_2 = '346832030017630_346838850016948';
 
   //FB Native Banner
-  static String fbNativeBannerId = '2964537240339084_2964649440327864';
+  static String fbNativeBannerId_1 = '346832030017630_346839040016929';
+  static String fbNativeBannerId_2 = '346832030017630_346839343350232';
 
   //FB Native
-  static String fbNativeId = '2964537240339084_2964651180327690';
+  static String fbNativeId = '346832030017630_347011736666326';
 
   static int adsFrequency = 50;
   bool _isInterstitialAdLoaded = false;
@@ -118,25 +119,22 @@ class AdsHelper {
     return fbNativeBannerAd;
   }
 
-  Widget getFbNative(String fbNativeId, double size) {
+  Widget getFbNative(String fbNativeId, double width, double height) {
     if (fbNativeAd == null) {
-      fbNativeAd = Container(
-        padding: EdgeInsets.symmetric(vertical: 4.0),
-        child: FacebookNativeAd(
-          placementId: fbNativeId,
-          adType: NativeAdType.NATIVE_AD,
-          width: double.infinity,
-          height: size,
-          backgroundColor: MyColors.grey2,
-          titleColor: Colors.black,
-          descriptionColor: Colors.black,
-          buttonColor: MyColors.black,
-          buttonTitleColor: Colors.white,
-          buttonBorderColor: Colors.white,
-          listener: (result, value) {
-            print("================(Fb Native)==============> : --> $value");
-          },
-        ),
+      fbNativeAd = FacebookNativeAd(
+        placementId: fbNativeId,
+        adType: NativeAdType.NATIVE_AD,
+        width: width,
+        height: height,
+        backgroundColor: MyColors.grey2,
+        titleColor: Colors.black,
+        descriptionColor: Colors.black,
+        buttonColor: MyColors.black,
+        buttonTitleColor: Colors.white,
+        buttonBorderColor: Colors.white,
+        listener: (result, value) {
+          print("================(Fb Native)==============> : --> $value");
+        },
       );
     }
     return fbNativeAd;

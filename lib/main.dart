@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:guideTemplate/screens/articles_list.dart';
+import 'package:guideTemplate/screens/counter_page.dart';
+import 'package:guideTemplate/screens/fetching_page.dart';
 import 'package:guideTemplate/screens/home.dart';
 import 'package:guideTemplate/screens/privacy_policy.dart';
+import 'package:guideTemplate/screens/servers_page.dart';
+import 'package:guideTemplate/screens/try_again_page.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
 import 'package:guideTemplate/utils/tools.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
+  "/counter": (BuildContext context) => CounterPage(),
+  "/servers": (BuildContext context) => ServersPage(),
+  "/fetching": (BuildContext context) => FetchingPage(),
+  "/try": (BuildContext context) => TryAgainPage(),
   "/privacy": (BuildContext context) => PrivacyScreen(),
   "/articles": (BuildContext context) => ArticlesScreen(),
 };

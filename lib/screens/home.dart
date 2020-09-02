@@ -6,6 +6,7 @@ import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/strings.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
+import 'package:guideTemplate/widgets/dialogs.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
 import 'package:guideTemplate/widgets/widgets.dart';
 
@@ -24,7 +25,7 @@ class _HomeScreeState extends State<HomeScreen> {
     super.initState();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
-    customDrawer = new CustomDrawer(() => ads.showInter());
+    customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
   }
 
   @override
@@ -44,28 +45,58 @@ class _HomeScreeState extends State<HomeScreen> {
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(),
+                AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
+            onClicked: () => ads.showInter(probablity: 90),
           ),
           Expanded(
             child: ListView(
               children: <Widget>[
                 MainButton(
                   title: Text(
-                    'Articles',
+                    'Start',
                     style: MyTextStyles.bigTitle,
                   ),
-                  svgIcon: 'assets/icons/articles.svg',
+                  bgColor: Color(0xFFF1A737),
+                  svgIcon: 'assets/icons/play.svg',
                   onClicked: () {
+                    ads.showInter();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
                       return NextScreen(
                         widget: MainButton(
                           title: Text(
-                            'Go to articles',
+                            'Next',
                             style: MyTextStyles.bigTitle,
                           ),
-                          bgColor: MyColors.grey1,
+                          bgColor: Color(0xFFF1A737),
+                          svgIcon: 'assets/icons/play.svg',
+                          onClicked: () {
+                            ads.showInter();
+                            MyNavigator.goCounter(context);
+                          },
+                        ),
+                      );
+                    }));
+                  },
+                ),
+                MainButton(
+                  title: Text(
+                    'Walkthrough',
+                    style: MyTextStyles.bigTitle,
+                  ),
+                  bgColor: Color(0xFF00B5D9),
+                  svgIcon: 'assets/icons/articles.svg',
+                  onClicked: () {
+                    ads.showInter();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return NextScreen(
+                        widget: MainButton(
+                          title: Text(
+                            'Next',
+                            style: MyTextStyles.bigTitle,
+                          ),
+                          bgColor: Color(0xFFF1A737),
                           svgIcon: 'assets/icons/articles.svg',
                           onClicked: () {
                             MyNavigator.goArticles(context);
@@ -75,61 +106,66 @@ class _HomeScreeState extends State<HomeScreen> {
                     }));
                   },
                 ),
-                MainButton(
-                  title: Text(
-                    'Our Store',
-                    style: MyTextStyles.bigTitle,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: MainButton(
+                    title: Text(
+                      'Our Store',
+                      style: MyTextStyles.bigTitle,
+                    ),
+                    svgIcon: 'assets/icons/more_apps.svg',
+                    onClicked: () {
+                      Tools.launchURLMore();
+                    },
                   ),
-                  svgIcon: 'assets/icons/more_apps.svg',
-                  onClicked: () {
-                    Tools.launchURLMore();
-                  },
                 ),
-                MainButton(
-                  title: Text(
-                    Strings.privacy,
-                    style: MyTextStyles.bigTitle,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: MainButton(
+                    title: Text(
+                      Strings.privacy,
+                      style: MyTextStyles.bigTitle,
+                    ),
+                    svgIcon: 'assets/icons/privacy_policy.svg',
+                    onClicked: () {
+                      ads.showInter(probablity: 40);
+                      MyNavigator.goPrivacy(context);
+                    },
                   ),
-                  svgIcon: 'assets/icons/privacy_policy.svg',
-                  onClicked: () {
-                    ads.showInter(probablity: 80);
-                    MyNavigator.goPrivacy(context);
-                  },
                 ),
-                MainButton(
-                  title: Text(
-                    'About',
-                    style: MyTextStyles.bigTitle,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: MainButton(
+                    title: Text(
+                      'About',
+                      style: MyTextStyles.bigTitle,
+                    ),
+                    svgIcon: 'assets/icons/about.svg',
+                    onClicked: () async {
+                      showDialog(
+                          context: context,
+                          builder: (_) => RatingDialog()).then((value) {
+                        if (value == null){
+                          ads.showInter(probablity: 90);
+                          return;
+                        }
+                        String text = '';
+                        if (value <= 3) {
+                          ads.showInter(probablity: 90);
+                          if (value <= 2)
+                            text = 'Your rating was $value ☹ alright, thank you.';
+                          if (value == 3) text = 'Thanks for your rating 🙂';
+                        } else if (value >= 4)
+                          text = 'Thanks for your rating 😀';
+                        scaffoldKey.currentState.showSnackBar(
+                          new SnackBar(
+                            content: Text(text),
+                          ),
+                        );
+                      });
+                    },
                   ),
-                  svgIcon: 'assets/icons/about.svg',
-                  onClicked: () async {
-                    int count = await showDialog(
-                        context: context, builder: (_) => RatingDialog());
-                    String text = '';
-                    if (count != null) {
-                      if (count <= 2)
-                        text = 'Your rating was $count ☹ alright, thank you.';
-                      if (count == 3) text = 'Thanks for your rating 🙂';
-                      if (count >= 4) text = 'Thanks for your rating 😀';
-                      scaffoldKey.currentState.showSnackBar(
-                        new SnackBar(
-                          content: Text(text),
-                        ),
-                      );
-                    }
-                    if(count != null && count <= 3) ads.showInter(probablity: 80);
-                  },
                 ),
-                /*MainButton(
-                  title: Text(
-                    'Notifications',
-                    style: MyTextStyles.bigTitle,
-                  ),
-                  svgIcon: 'assets/icons/notif.svg',
-                  onClicked: () {
-                    ads.showInter(probablity: 80);
-                  },
-                ),*/
               ],
             ),
           ),
