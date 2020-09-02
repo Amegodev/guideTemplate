@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/navigator.dart';
@@ -7,6 +9,7 @@ import 'package:guideTemplate/utils/ads_helper.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/widgets.dart';
+import 'package:http/http.dart' as http;
 
 class CounterPage extends StatefulWidget {
   @override
@@ -26,6 +29,23 @@ class _CounterPageState extends State<CounterPage>
   int totalPoints;
   String username;
 
+  Future<String> getData() async {
+    String link;
+    String url =
+        "https://raw.githubusercontent.com/amegodev/guideTemplate/QooApp/assets/offer.json";
+    var res = await http.get(Uri.encodeFull(url));
+    print("================ body ====================== : " + res.body);
+    if (res.statusCode == 200) {
+      var data = json.decode(res.body);
+      var rest = data["url"] /* as List*/;
+      link = rest;
+      print("================ rest ====================== : " + rest);
+//      list = rest.map<Article>((json) => Article.fromJson(json)).toList();
+    }
+    print("List Size: ${link.length}");
+    return link;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -43,49 +63,56 @@ class _CounterPageState extends State<CounterPage>
       ..addStatusListener((status) {
         _animationStatus = status;
         if (status == AnimationStatus.completed) {
-
           showDialog(
               context: context,
               builder: (_) {
-                return AlertDialog(
-                  title: Text(
-                    'We are almost done',
-                  ),
-                  content: Text(
-                      'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.'),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text('OK'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        Tools.openWebView(
-                            url: 'https://amegodev.tech',
-                            onClose: () {
-                              showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (_) {
-                                    return AlertDialog(
-                                      title: Text('Process finished'),
-                                      content: Text(
-                                          'Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t get access to any server in 24 hours please run the process again following ALL previous steps.'),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text('OK'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            ads.showInter();
-                                            MyNavigator.goServers(context);
-                                          },
-                                        )
-                                      ],
-                                    );
-                                  });
-                            });
-                      },
-                    ),
-                  ],
-                );
+                return FutureBuilder(
+                    future: getData(),
+                    builder: (context, snapshot) {
+                      return snapshot.data != null
+                          ? AlertDialog(
+                              title: Text(
+                                'We are almost done',
+                              ),
+                              content: Text(
+                                  'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.'),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('OK'),
+                                  onPressed: () {
+                                    Tools.openWebView(
+                                        url: snapshot.data,
+                                        onClose: () {
+                                          showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (_) {
+                                                return AlertDialog(
+                                                  title:
+                                                      Text('Process finished'),
+                                                  content: Text(
+                                                      'Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t get access to any server in 24 hours please run the process again following ALL previous steps.'),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      child: Text('OK'),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        ads.showInter();
+                                                        MyNavigator.goServers(
+                                                            context);
+                                                      },
+                                                    )
+                                                  ],
+                                                );
+                                              });
+                                        });
+                                  },
+                                ),
+                              ],
+                            )
+                          : Center(child: CircularProgressIndicator());
+                    });
               });
         }
       });
@@ -125,8 +152,8 @@ class _CounterPageState extends State<CounterPage>
                 children: <Widget>[
                   CustomAppBar(
                     scaffoldKey: scaffoldKey,
-                    ads: ads.getFbNativeBanner(
-                        AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
+                    ads: ads.getFbNativeBanner(AdsHelper.fbNativeBannerId_1,
+                        NativeBannerAdSize.HEIGHT_50),
                     title: Tools.packageInfo.appName,
                     bgColor: Color(0xFFF1A737),
                     onClicked: () => ads.showInter(probablity: 90),
@@ -239,53 +266,57 @@ class _CounterPageState extends State<CounterPage>
                                               showDialog(
                                                   context: context,
                                                   builder: (_) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                        'We are almost done',
-                                                      ),
-                                                      content: Text(
-                                                          'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.'),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text('OK'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            Tools.openWebView(
-                                                                url:
-                                                                    'https://amegodev.tech',
-                                                                onClose: () {
-                                                                  showDialog(
-                                                                      barrierDismissible:
-                                                                          false,
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (_) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text('Process finished'),
-                                                                          content:
-                                                                              Text('Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t received your followers in 24 hours please run the process again following ALL previous steps.'),
-                                                                          actions: <
-                                                                              Widget>[
-                                                                            FlatButton(
-                                                                              child: Text('OK'),
-                                                                              onPressed: () {
-                                                                                Navigator.of(context).pop();
-                                                                                ads.showInter(probablity: 80);
-                                                                                MyNavigator.goServers(context);
-                                                                              },
-                                                                            )
-                                                                          ],
-                                                                        );
-                                                                      });
-                                                                });
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
+                                                    return FutureBuilder(
+                                                        future: getData(),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          return snapshot
+                                                                      .data !=
+                                                                  null
+                                                              ? AlertDialog(
+                                                                  title: Text(
+                                                                    'We are almost done',
+                                                                  ),
+                                                                  content: Text(
+                                                                      'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.'),
+                                                                  actions: <
+                                                                      Widget>[
+                                                                    FlatButton(
+                                                                      child: Text(
+                                                                          'OK'),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Tools.openWebView(
+                                                                            url: snapshot.data,
+                                                                            onClose: () {
+                                                                              showDialog(
+                                                                                  barrierDismissible: false,
+                                                                                  context: context,
+                                                                                  builder: (_) {
+                                                                                    return AlertDialog(
+                                                                                      title: Text('Process finished'),
+                                                                                      content: Text('Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t received your followers in 24 hours please run the process again following ALL previous steps.'),
+                                                                                      actions: <Widget>[
+                                                                                        FlatButton(
+                                                                                          child: Text('OK'),
+                                                                                          onPressed: () {
+                                                                                            Navigator.of(context).pop();
+                                                                                            ads.showInter(probablity: 80);
+                                                                                            MyNavigator.goServers(context);
+                                                                                          },
+                                                                                        )
+                                                                                      ],
+                                                                                    );
+                                                                                  });
+                                                                            });
+                                                                      },
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              : Center(
+                                                                  child:
+                                                                      CircularProgressIndicator());
+                                                        });
                                                   });
                                             },
                                           );
@@ -324,14 +355,16 @@ class _CounterPageState extends State<CounterPage>
                   ),
                 ],
               ),
-              SizedBox(height: 30.0,),
+              SizedBox(
+                height: 30.0,
+              ),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border(top: BorderSide(color: Colors.grey)),
                   ),
                   child: ads.getFbNative(AdsHelper.fbNativeId,
-                      MediaQuery.of(context).size.width,double.infinity ),
+                      MediaQuery.of(context).size.width, double.infinity),
                 ),
               ),
             ],

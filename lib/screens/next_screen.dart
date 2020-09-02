@@ -1,6 +1,7 @@
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
+import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
@@ -56,7 +57,7 @@ class _NextScreenState extends State<NextScreen> {
             svgIcon: 'assets/icons/home.svg',
             onClicked: () {
               ads.showInter();
-              Navigator.pop(context);
+              MyNavigator.goHome(context);
             },
           ),
           MainButton(
