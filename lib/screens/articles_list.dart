@@ -2,8 +2,10 @@ import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/articles.dart';
+import 'package:guideTemplate/models/article_model.dart';
 import 'package:guideTemplate/screens/article_details.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
+import 'package:guideTemplate/utils/database_helper.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
@@ -15,13 +17,24 @@ class ArticlesScreen extends StatefulWidget {
 }
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
+  List<Article> articles = [];
   AdsHelper ads;
   CustomDrawer customDrawer;
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 
+  void getArticlesList() {
+    TemplateDatabaseProvider provider = new TemplateDatabaseProvider();
+    provider.getAllArticles().then((onValue) {
+      setState(() {
+        this.articles = onValue;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    getArticlesList();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_2);
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
@@ -45,13 +58,13 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
                 AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(probablity: 90),
+            onClicked: () => ads.showInter(probability: 90),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: Articles.titles.length,
+              itemCount: articles.length,
               itemBuilder: (context, index) {
-                return index % 8 == 0 && index != 0
+                return index % 100 == 0 && index != 0
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         height: 300.0,
@@ -63,14 +76,14 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(14.0),
                           child: ads.getFbNative(
-                              AdsHelper.fbNativeId,
+                              AdsHelper.fbNativeId_1,
                               MediaQuery.of(context).size.width,
                               double.infinity),
                         ),
                       )
                     : MainButton(
                         title: Text(
-                          Articles.titles[index],
+                          articles[index].title,
                           style: MyTextStyles.bigTitle,
                         ),
                         svgIcon: 'assets/icons/articles.svg',

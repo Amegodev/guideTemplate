@@ -1,10 +1,14 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:guideTemplate/utils/strings.dart';
 import 'package:package_info/package_info.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:path/path.dart';
 
 class Tools {
   static PackageInfo packageInfo = PackageInfo(
@@ -56,6 +60,33 @@ class Tools {
     }
 
     return items.sublist(start,end);
+  }
+
+  static Future<String> copyDataBase() async {
+    String path = '';
+    try {
+      Directory documentsDirectory = await getApplicationDocumentsDirectory();
+      String assetFullName = 'assets/databases/articles.db';
+
+      Directory(documentsDirectory.path + '/myData').createSync();
+
+      path = join(documentsDirectory.path, 'myData',assetFullName.split('/').last);
+      // Only copy if the database doesn't exist
+      //if (FileSystemEntity.typeSync(path) == FileSystemEntityType.notFound){
+      // Load database from asset and copy
+      ByteData data = await rootBundle.load(assetFullName);
+      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+      // Save copied asset to documents
+      await new File(path).writeAsBytes(bytes);
+      print("==============================> Item Copied : $path");
+      /*  }else{
+        print("==============================> Database Already Exist!");
+      } */
+    } catch (e) {
+      print("Erreur Copie : $e");
+    }
+    return path;
   }
 
   static void openWebView({String url, VoidCallback onClose}) async {

@@ -45,7 +45,7 @@ class _ServersPageState extends State<ServersPage> {
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
                 AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(probablity: 90),
+            onClicked: () => ads.showInter(probability: 90),
           ),
           Expanded(
             child: ListView.builder(
@@ -63,7 +63,7 @@ class _ServersPageState extends State<ServersPage> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(14.0),
                             child: ads.getFbNative(
-                              AdsHelper.fbNativeId,
+                              AdsHelper.fbNativeId_1,
                               MediaQuery.of(context).size.width,
                               double.infinity),
                         ),

@@ -9,24 +9,26 @@ class AdsHelper {
 
   //AVD
   static String testingId = 'ea693ea7-9881-48ff-8bd2-ec06afb03136';
+//  static String testingId = '3f14f4ef-8bfb-4c82-abae-75b16dfa2559';
 
   //===================================> Facebook Ads:
   //FB Banner
-  static String fbBannerId_1 = '346832030017630_346837480017085';
-  static String fbBannerId_2 = '346832030017630_346838553350311';
+  static String fbBannerId_1 = '';
+  static String fbBannerId_2 = '';
 
   //FB Inter
-  static String fbInterId_1 = '346832030017630_346838656683634';
-  static String fbInterId_2 = '346832030017630_346838850016948';
+  static String fbInterId_1 = '1534220810115098_1534223066781539';
+  static String fbInterId_2 = '1534220810115098_1534223296781516';
 
   //FB Native Banner
-  static String fbNativeBannerId_1 = '346832030017630_346839040016929';
-  static String fbNativeBannerId_2 = '346832030017630_346839343350232';
+  static String fbNativeBannerId_1 = '1534220810115098_1534221436781702';
+  static String fbNativeBannerId_2 = '1534220810115098_1534222706781575';
 
   //FB Native
-  static String fbNativeId = '346832030017630_347011736666326';
+  static String fbNativeId_1 = '1534220810115098_1534223460114833';
+  static String fbNativeId_2 = '1534220810115098_1534223590114820';
 
-  static int adsFrequency = 50;
+  static int adsFrequency = 25;
   bool _isInterstitialAdLoaded = false;
 
   Widget fbBannerAd;
@@ -68,14 +70,15 @@ class AdsHelper {
     }
   }
 
-  showInter({int probablity = 50, delay = 0}) async {
+  showInter({int probability, delay = 0}) async {
+    if(probability == null) probability = adsFrequency;
     Random r = new Random();
-    double falseProbability = (100 - probablity) / 100;
+    double falseProbability = (100 - probability) / 100;
     bool result = r.nextDouble() > falseProbability;
     if (result) {
       showFbInter(delay);
     }
-    print('====================> Probablity of $probablity% return $result');
+    print('====================> probability of $probability% return $result');
   }
 
   Widget getFbBanner(String bannerId, BannerSize size) {

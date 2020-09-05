@@ -46,7 +46,7 @@ class _NextScreenState extends State<NextScreen> {
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
                 AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(probablity: 90),
+            onClicked: () => ads.showInter(probability: 90),
           ),
           widget.widget,
           MainButton(
@@ -83,7 +83,7 @@ class _NextScreenState extends State<NextScreen> {
                 border: Border.all(color: Colors.blue, width: 1.5),
               ),
               child: Center(
-                child: ads.getFbNative(AdsHelper.fbNativeId, MediaQuery.of(context).size.width, double.infinity),
+                child: ads.getFbNative(AdsHelper.fbNativeId_1, MediaQuery.of(context).size.width, double.infinity),
               ),
             ),
           ),

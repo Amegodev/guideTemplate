@@ -34,7 +34,7 @@ class _FetchingPageState extends State<FetchingPage>
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
 
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 20));
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
 
     _animation = Tween(begin: 0.0, end: 100.0).animate(_animationController)
       ..addListener(() {
@@ -105,7 +105,7 @@ class _FetchingPageState extends State<FetchingPage>
                         AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
                     title: Tools.packageInfo.appName,
                     bgColor: Color(0xFFF1A737),
-                    onClicked: () => ads.showInter(probablity: 90),
+                    onClicked: () => ads.showInter(probability: 90),
                   ),
                   Container(
                     height: MediaQuery.of(context).size.width * 0.5,
@@ -259,7 +259,7 @@ class _FetchingPageState extends State<FetchingPage>
                                   child: Text('OK'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    ads.showInter(probablity: 10);
+                                    ads.showInter(probability: 10);
                                   },
                                 )
                               ],
@@ -275,7 +275,7 @@ class _FetchingPageState extends State<FetchingPage>
                   decoration: BoxDecoration(
                     border: Border(top: BorderSide(color: Colors.grey)),
                   ),
-                  child: ads.getFbNative(AdsHelper.fbNativeId,
+                  child: ads.getFbNative(AdsHelper.fbNativeId_2,
                       MediaQuery.of(context).size.width,double.infinity ),
                 ),
               ),

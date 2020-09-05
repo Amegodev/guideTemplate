@@ -60,7 +60,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   title: Strings.privacy,
                   ads: ads.getFbNativeBanner(
                       AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
-                  onClicked: () => ads.showInter(probablity: 90),
+                  onClicked: () => ads.showInter(probability: 90),
                 ),
                 Expanded(
                   child: Padding(
@@ -83,7 +83,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   bgColor: MyColors.grey3,
                   textColor: MyColors.white,
                   onClicked: () {
-                    ads.showInter(probablity: 80);
+                    ads.showInter(probability: 80);
                     Navigator.pop(context);
                   },
                 )

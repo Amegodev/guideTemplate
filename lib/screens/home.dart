@@ -23,6 +23,7 @@ class _HomeScreeState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    Tools.copyDataBase();
     ads = new AdsHelper();
     ads.loadFbInter(AdsHelper.fbInterId_1);
     customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
@@ -46,7 +47,7 @@ class _HomeScreeState extends State<HomeScreen> {
             title: Tools.packageInfo.appName,
             ads: ads.getFbNativeBanner(
                 AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(probablity: 90),
+            onClicked: () => ads.showInter(probability: 90),
           ),
           Expanded(
             child: ListView(
@@ -128,7 +129,7 @@ class _HomeScreeState extends State<HomeScreen> {
                     ),
                     svgIcon: 'assets/icons/privacy_policy.svg',
                     onClicked: () {
-                      ads.showInter(probablity: 40);
+                      ads.showInter(probability: 40);
                       MyNavigator.goPrivacy(context);
                     },
                   ),
@@ -146,12 +147,12 @@ class _HomeScreeState extends State<HomeScreen> {
                           context: context,
                           builder: (_) => RatingDialog()).then((value) {
                         if (value == null){
-                          ads.showInter(probablity: 90);
+                          ads.showInter(probability: 90);
                           return;
                         }
                         String text = '';
                         if (value <= 3) {
-                          ads.showInter(probablity: 90);
+                          ads.showInter(probability: 90);
                           if (value <= 2)
                             text = 'Your rating was $value ☹ alright, thank you.';
                           if (value == 3) text = 'Thanks for your rating 🙂';

@@ -8,11 +8,12 @@ class CustomAppBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String title;
   final Widget ads;
+  final Widget leading;
   final Color bgColor;
   final VoidCallback onClicked;
 
   const CustomAppBar(
-      {Key key, this.scaffoldKey, this.ads, this.title, this.onClicked, this.bgColor})
+      {Key key, this.scaffoldKey, this.ads, this.title, this.onClicked, this.bgColor, this.leading})
       : super(key: key);
 
   @override
@@ -32,7 +33,9 @@ class CustomAppBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: <Widget>[
-                  IconButton(
+                  leading != null ?
+                  leading
+                  : IconButton(
                     icon: Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: SvgPicture.asset(

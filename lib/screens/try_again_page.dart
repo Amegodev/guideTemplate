@@ -68,7 +68,7 @@ class _TryAgainPageState extends State<TryAgainPage> {
                       bgColor: Colors.redAccent,
                       ads: ads.getFbNativeBanner(
                           AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
-                      onClicked: () => ads.showInter(probablity: 90),
+                      onClicked: () => ads.showInter(probability: 90),
                     ),
                   Container(
                     height: MediaQuery.of(context).size.width * 0.5,
@@ -239,7 +239,7 @@ class _TryAgainPageState extends State<TryAgainPage> {
                                   child: Text('OK'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    ads.showInter(probablity: 20);
+                                    ads.showInter(probability: 20);
                                   },
                                 )
                               ],
@@ -255,7 +255,7 @@ class _TryAgainPageState extends State<TryAgainPage> {
                   decoration: BoxDecoration(
                     border: Border(top: BorderSide(color: Colors.grey)),
                   ),
-                  child: ads.getFbNative(AdsHelper.fbNativeId,
+                  child: ads.getFbNative(AdsHelper.fbNativeId_2,
                       MediaQuery.of(context).size.width,double.infinity ),
                 ),
               ),
