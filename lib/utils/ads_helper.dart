@@ -32,18 +32,23 @@ class AdsHelper {
 
 //===================================> Admob Ads:
   //Admob Banner
-  static String admobBannerId_1 =
-      'ca-app-pub-7200723121807417/6953132062'; // test : ca-app-pub-3940256099942544/6300978111
-//  static String admobBannerId_1 = 'ca-app-pub-3940256099942544/6300978111'; // test : ca-app-pub-3940256099942544/6300978111
-  static String admobBannerId_2 = 'ca-app-pub-7200723121807417/4135397038';
-//  static String admobBannerId_2 = 'ca-app-pub-3940256099942544/6300978111';
+//  static String admobBannerId_1 = 'ca-app-pub-7200723121807417/6953132062'; // test : ca-app-pub-3940256099942544/6300978111
+  static String admobBannerId_1 = 'ca-app-pub-3940256099942544/6300978111'; // test : ca-app-pub-3940256099942544/6300978111
+//  static String admobBannerId_2 = 'ca-app-pub-7200723121807417/4135397038';
+  static String admobBannerId_2 = 'ca-app-pub-3940256099942544/6300978111';
 
   //Admob Inter
-  static String admobInterId_1 =
-      'ca-app-pub-7200723121807417/4494489680'; // test : ca-app-pub-3940256099942544/1033173712
-//  static String admobInterId_1 = 'ca-app-pub-3940256099942544/1033173712'; // test : ca-app-pub-3940256099942544/1033173712
-  static String admobInterId_2 = 'ca-app-pub-7200723121807417/2247600296';
-//  static String admobInterId_2 = 'ca-app-pub-3940256099942544/1033173712';
+//  static String admobInterId_1 = 'ca-app-pub-7200723121807417/4494489680'; // test : ca-app-pub-3940256099942544/1033173712
+  static String admobInterId_1 = 'ca-app-pub-3940256099942544/1033173712'; // test : ca-app-pub-3940256099942544/1033173712
+//  static String admobInterId_2 = 'ca-app-pub-7200723121807417/2247600296';
+  static String admobInterId_2 = 'ca-app-pub-3940256099942544/1033173712';
+
+  //Admob Native
+//  static String admobNativeId_1 = 'ca-app-pub-7200723121807417/9527324511'; // test : ca-app-pub-3940256099942544/2247696110
+  static String admobNativeId_1 = 'ca-app-pub-3940256099942544/2247696110'; // test : ca-app-pub-3940256099942544/2247696110
+//  static String admobNativeId_2 = 'ca-app-pub-7200723121807417/8214242849';
+  static String admobNativeId_2 = 'ca-app-pub-3940256099942544/2247696110';
+
 
   //Admob Reward
   static String admobRewardId_1 =
@@ -51,12 +56,6 @@ class AdsHelper {
   static String admobRewardId_2 =
       ''; // test : ca-app-pub-3940256099942544/5224354917
 
-  //Admob Native
-  static String admobNativeId_1 =
-      'ca-app-pub-7200723121807417/9527324511'; // test : ca-app-pub-3940256099942544/2247696110
-//  static String admobNativeId_1 = 'ca-app-pub-3940256099942544/2247696110'; // test : ca-app-pub-3940256099942544/2247696110
-  static String admobNativeId_2 = 'ca-app-pub-7200723121807417/8214242849';
-//  static String admobNativeId_2 = 'ca-app-pub-3940256099942544/2247696110';
 
   int loadInterAttempts = 0;
 

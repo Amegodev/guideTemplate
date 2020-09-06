@@ -21,10 +21,8 @@ class Tools {
   );
 
   //===================================> Ads Type
-  static String trafficurl =
-      'https://play.google.com/store/apps/details?id=com.amegodev.faketweetapp';
-  static String trafficmessage =
-      'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.';
+  static String trafficurl = 'https://play.google.com/store/apps/details?id=com.amegodev.fakecommentfb';
+  static String trafficmessage = 'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.';
   static String interadnetwork = 'startapp';
   static String banneradnetwork = 'fb';
   static String nativeadnetwork = 'fb';
