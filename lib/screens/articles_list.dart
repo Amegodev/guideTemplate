@@ -1,7 +1,6 @@
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:guideTemplate/articles.dart';
 import 'package:guideTemplate/models/article_model.dart';
 import 'package:guideTemplate/screens/article_details.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';

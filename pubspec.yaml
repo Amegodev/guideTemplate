@@ -21,6 +21,9 @@ dependencies:
   flutter_inappwebview: ^4.0.0+4
   timer_count_down: ^1.0.4+1
   http: ^0.12.2
+  flutter_native_admob: ^2.1.0+3
+  admob_flutter: ^1.0.0-beta.5
+  startapp: ^0.5.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
