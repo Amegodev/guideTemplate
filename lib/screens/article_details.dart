@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:guideTemplate/models/article_model.dart';
@@ -37,7 +36,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
     super.initState();
     ads = new AdsHelper();
     getArticle();
-    ads.loadFbInter(AdsHelper.fbInterId_2);
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
   }
 
@@ -74,8 +73,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 },
               ),
               title: Tools.packageInfo.appName,
-              ads: ads.getFbNativeBanner(
-                  AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
+              ads: ads.getBanner(),
               onClicked: () => ads.showInter(probability: 90),
             ),
             Expanded(

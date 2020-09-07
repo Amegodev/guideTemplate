@@ -8,8 +8,7 @@ class Strings {
   static final String privacy = "Privacy Policy";
   static final String storeId = "6351844879181348391";
   static final String storeName = "Karim StoreApps";
-  static final String jsonUrl =
-      "https://raw.githubusercontent.com/amegodev/guideTemplate/5713772444ed1680885b13c2d8d826568b794fc0/assets/offer.json";
+  static final String jsonUrl = "https://raw.githubusercontent.com/amegodev/guideTemplate/hi_neighbor/assets/offer.json";
   static final String aboutText =
       """QooApp Walkthough : what it is and how to use it\nHere's everything you need to know about one of the most popular apps right now
   """;

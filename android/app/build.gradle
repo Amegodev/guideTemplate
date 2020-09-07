@@ -43,11 +43,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.qooappwalkthrough.happycheckguide"
+        applicationId "com.myneighbour.hellogame"
         minSdkVersion 17
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -72,3 +73,5 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,4 +1,4 @@
-package com.qooappwalkthrough.happycheckguide
+package com.myneighbour.hellogame
 
 import io.flutter.embedding.android.FlutterActivity
 

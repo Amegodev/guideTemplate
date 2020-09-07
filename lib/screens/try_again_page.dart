@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:guideTemplate/utils/strings.dart';
@@ -28,7 +27,7 @@ class _TryAgainPageState extends State<TryAgainPage> {
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_2);
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
     servers = Tools.shuffle(Strings.servers, 5, 15);
   }
@@ -66,8 +65,7 @@ class _TryAgainPageState extends State<TryAgainPage> {
                       scaffoldKey: scaffoldKey,
                       title: Tools.packageInfo.appName,
                       bgColor: Colors.redAccent,
-                      ads: ads.getFbNativeBanner(
-                          AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
+                      ads: ads.getBanner(),
                       onClicked: () => ads.showInter(probability: 90),
                     ),
                   Container(
@@ -255,8 +253,7 @@ class _TryAgainPageState extends State<TryAgainPage> {
                   decoration: BoxDecoration(
                     border: Border(top: BorderSide(color: Colors.grey)),
                   ),
-                  child: ads.getFbNative(AdsHelper.fbNativeId_2,
-                      MediaQuery.of(context).size.width,double.infinity ),
+                  child: ads.getNative(MediaQuery.of(context).size.width, double.infinity),
                 ),
               ),
             ],

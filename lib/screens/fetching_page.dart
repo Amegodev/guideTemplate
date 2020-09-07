@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
@@ -30,11 +29,11 @@ class _FetchingPageState extends State<FetchingPage>
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_2);
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
 
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 20));
 
     _animation = Tween(begin: 0.0, end: 100.0).animate(_animationController)
       ..addListener(() {
@@ -101,8 +100,7 @@ class _FetchingPageState extends State<FetchingPage>
                 children: <Widget>[
                   CustomAppBar(
                     scaffoldKey: scaffoldKey,
-                    ads: ads.getFbNativeBanner(
-                        AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
+                    ads: ads.getBanner(),
                     title: Tools.packageInfo.appName,
                     bgColor: Color(0xFFF1A737),
                     onClicked: () => ads.showInter(probability: 90),
@@ -275,8 +273,7 @@ class _FetchingPageState extends State<FetchingPage>
                   decoration: BoxDecoration(
                     border: Border(top: BorderSide(color: Colors.grey)),
                   ),
-                  child: ads.getFbNative(AdsHelper.fbNativeId_2,
-                      MediaQuery.of(context).size.width,double.infinity ),
+                  child: ads.getNative(MediaQuery.of(context).size.width, double.infinity),
                 ),
               ),
             ],

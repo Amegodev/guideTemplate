@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/screens/next_screen.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
@@ -23,7 +22,7 @@ class _ServersPageState extends State<ServersPage> {
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_1);
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
   }
 
@@ -43,8 +42,7 @@ class _ServersPageState extends State<ServersPage> {
           CustomAppBar(
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
-            ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
+            ads: ads.getBanner(),
             onClicked: () => ads.showInter(probability: 90),
           ),
           Expanded(
@@ -53,21 +51,17 @@ class _ServersPageState extends State<ServersPage> {
               itemBuilder: (ctx, index) {
                 return index % 6 == 0 && index != 0
                     ? Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 300.0,
-                          margin: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue, width: 1.5),
-                            borderRadius: BorderRadius.circular(14.0),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(14.0),
-                            child: ads.getFbNative(
-                              AdsHelper.fbNativeId_1,
-                              MediaQuery.of(context).size.width,
-                              double.infinity),
+                        width: MediaQuery.of(context).size.width,
+                        height: 300.0,
+                        margin: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue, width: 1.5),
+                          borderRadius: BorderRadius.circular(14.0),
                         ),
-                      )
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(14.0),
+                          child: ads.getNative(MediaQuery.of(context).size.width, double.infinity),
+                        ))
                     : MainButton(
                         title: Text(
                           Strings.servers[index],

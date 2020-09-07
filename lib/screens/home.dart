@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/screens/next_screen.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
@@ -23,9 +22,9 @@ class _HomeScreeState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Tools.copyDataBase();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_1);
+    Tools.copyDataBase();
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
   }
 
@@ -40,137 +39,145 @@ class _HomeScreeState extends State<HomeScreen> {
     return Scaffold(
       key: scaffoldKey,
       drawer: customDrawer.buildDrawer(context),
-      body: Column(
-        children: <Widget>[
-          CustomAppBar(
-            scaffoldKey: scaffoldKey,
-            title: Tools.packageInfo.appName,
-            ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId_1, NativeBannerAdSize.HEIGHT_50),
-            onClicked: () => ads.showInter(probability: 90),
-          ),
-          Expanded(
-            child: ListView(
-              children: <Widget>[
-                MainButton(
-                  title: Text(
-                    'Start',
-                    style: MyTextStyles.bigTitle,
+      body: FutureBuilder(
+          future: Tools.fetchData(),
+          builder: (context, snapshot) {
+            if(snapshot.connectionState == ConnectionState.done){
+              return Column(
+                children: <Widget>[
+                  CustomAppBar(
+                    scaffoldKey: scaffoldKey,
+                    title: Tools.packageInfo.appName,
+                    ads: ads.getBanner(),
+                    onClicked: () => ads.showInter(),
                   ),
-                  bgColor: Color(0xFFF1A737),
-                  svgIcon: 'assets/icons/play.svg',
-                  onClicked: () {
-                    ads.showInter();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return NextScreen(
-                        widget: MainButton(
+                  Expanded(
+                    child: ListView(
+                      children: <Widget>[
+                        MainButton(
                           title: Text(
-                            'Next',
+                            'Start',
                             style: MyTextStyles.bigTitle,
                           ),
                           bgColor: Color(0xFFF1A737),
                           svgIcon: 'assets/icons/play.svg',
                           onClicked: () {
                             ads.showInter();
-                            MyNavigator.goCounter(context);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (BuildContext context) {
+                                  return NextScreen(
+                                    widget: MainButton(
+                                      title: Text(
+                                        'Next',
+                                        style: MyTextStyles.bigTitle,
+                                      ),
+                                      bgColor: Color(0xFFF1A737),
+                                      svgIcon: 'assets/icons/play.svg',
+                                      onClicked: () {
+                                        ads.showInter();
+                                        MyNavigator.goCounter(context);
+                                      },
+                                    ),
+                                  );
+                                }));
                           },
                         ),
-                      );
-                    }));
-                  },
-                ),
-                MainButton(
-                  title: Text(
-                    'Walkthrough',
-                    style: MyTextStyles.bigTitle,
-                  ),
-                  bgColor: Color(0xFF00B5D9),
-                  svgIcon: 'assets/icons/articles.svg',
-                  onClicked: () {
-                    ads.showInter();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return NextScreen(
-                        widget: MainButton(
+                        MainButton(
                           title: Text(
-                            'Next',
+                            'Walkthrough',
                             style: MyTextStyles.bigTitle,
                           ),
-                          bgColor: Color(0xFFF1A737),
+                          bgColor: Color(0xFF00B5D9),
                           svgIcon: 'assets/icons/articles.svg',
                           onClicked: () {
-                            MyNavigator.goArticles(context);
+                            ads.showInter();
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (BuildContext context) {
+                                  return NextScreen(
+                                    widget: MainButton(
+                                      title: Text(
+                                        'Next',
+                                        style: MyTextStyles.bigTitle,
+                                      ),
+                                      bgColor: Color(0xFFF1A737),
+                                      svgIcon: 'assets/icons/articles.svg',
+                                      onClicked: () {
+                                        MyNavigator.goArticles(context);
+                                      },
+                                    ),
+                                  );
+                                }));
                           },
                         ),
-                      );
-                    }));
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: MainButton(
-                    title: Text(
-                      'Our Store',
-                      style: MyTextStyles.bigTitle,
-                    ),
-                    svgIcon: 'assets/icons/more_apps.svg',
-                    onClicked: () {
-                      Tools.launchURLMore();
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: MainButton(
-                    title: Text(
-                      Strings.privacy,
-                      style: MyTextStyles.bigTitle,
-                    ),
-                    svgIcon: 'assets/icons/privacy_policy.svg',
-                    onClicked: () {
-                      ads.showInter(probability: 40);
-                      MyNavigator.goPrivacy(context);
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: MainButton(
-                    title: Text(
-                      'About',
-                      style: MyTextStyles.bigTitle,
-                    ),
-                    svgIcon: 'assets/icons/about.svg',
-                    onClicked: () async {
-                      showDialog(
-                          context: context,
-                          builder: (_) => RatingDialog()).then((value) {
-                        if (value == null){
-                          ads.showInter(probability: 90);
-                          return;
-                        }
-                        String text = '';
-                        if (value <= 3) {
-                          ads.showInter(probability: 90);
-                          if (value <= 2)
-                            text = 'Your rating was $value ☹ alright, thank you.';
-                          if (value == 3) text = 'Thanks for your rating 🙂';
-                        } else if (value >= 4)
-                          text = 'Thanks for your rating 😀';
-                        scaffoldKey.currentState.showSnackBar(
-                          new SnackBar(
-                            content: Text(text),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          child: MainButton(
+                            title: Text(
+                              'Our Store',
+                              style: MyTextStyles.bigTitle,
+                            ),
+                            svgIcon: 'assets/icons/more_apps.svg',
+                            onClicked: () {
+                              Tools.launchURLMore();
+                            },
                           ),
-                        );
-                      });
-                    },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          child: MainButton(
+                            title: Text(
+                              Strings.privacy,
+                              style: MyTextStyles.bigTitle,
+                            ),
+                            svgIcon: 'assets/icons/privacy_policy.svg',
+                            onClicked: () {
+                              ads.showInter();
+                              MyNavigator.goPrivacy(context);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          child: MainButton(
+                            title: Text(
+                              'About',
+                              style: MyTextStyles.bigTitle,
+                            ),
+                            svgIcon: 'assets/icons/about.svg',
+                            onClicked: () async {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => RatingDialog()).then((value) {
+                                if (value == null){
+                                  ads.showInter();
+                                  return;
+                                }
+                                String text = '';
+                                if (value <= 3) {
+                                  ads.showInter();
+                                  if (value <= 2)
+                                    text = 'Your rating was $value ☹ alright, thank you.';
+                                  if (value == 3) text = 'Thanks for your rating 🙂';
+                                } else if (value >= 4)
+                                  text = 'Thanks for your rating 😀';
+                                scaffoldKey.currentState.showSnackBar(
+                                  new SnackBar(
+                                    content: Text(text),
+                                  ),
+                                );
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
+                ],
+              );
+            }else{
+              return Center(child: CircularProgressIndicator(),);
+            }
+          }
       ),
     );
   }

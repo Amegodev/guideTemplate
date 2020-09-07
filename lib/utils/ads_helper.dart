@@ -15,39 +15,39 @@ class AdsHelper {
 
 //===================================> Facebook Ads:
   //FB Banner
-  static String fbBannerId_1 = '346832030017630_346837480017085';
-  static String fbBannerId_2 = '346832030017630_346838553350311';
+  static String fbBannerId_1 = '';
+  static String fbBannerId_2 = '';
 
   //FB Inter
-  static String fbInterId_1 = '346832030017630_346838656683634';
-  static String fbInterId_2 = '346832030017630_346838850016948';
+  static String fbInterId_1 = '';
+  static String fbInterId_2 = '';
 
   //FB Native Banner
-  static String fbNativeBannerId_1 = '346832030017630_346839040016929';
-  static String fbNativeBannerId_2 = '346832030017630_346839343350232';
+  static String fbNativeBannerId_1 = '';
+  static String fbNativeBannerId_2 = '';
 
   //FB Native
-  static String fbNativeId_1 = '346832030017630_347011736666326';
-  static String fbNativeId_2 = '346832030017630_347011736666326';
+  static String fbNativeId_1 = '';
+  static String fbNativeId_2 = '';
 
 //===================================> Admob Ads:
   //Admob Banner
-//  static String admobBannerId_1 = 'ca-app-pub-7200723121807417/6953132062'; // test : ca-app-pub-3940256099942544/6300978111
-  static String admobBannerId_1 = 'ca-app-pub-3940256099942544/6300978111'; // test : ca-app-pub-3940256099942544/6300978111
-//  static String admobBannerId_2 = 'ca-app-pub-7200723121807417/4135397038';
-  static String admobBannerId_2 = 'ca-app-pub-3940256099942544/6300978111';
+  static String admobBannerId_1 = 'ca-app-pub-9868138867214816/3208988867'; // test : ca-app-pub-3940256099942544/6300978111
+//  static String admobBannerId_1 = 'ca-app-pub-3940256099942544/6300978111'; // test : ca-app-pub-3940256099942544/6300978111
+  static String admobBannerId_2 = 'ca-app-pub-9868138867214816/6042024000';
+//  static String admobBannerId_2 = 'ca-app-pub-3940256099942544/6300978111';
 
   //Admob Inter
-//  static String admobInterId_1 = 'ca-app-pub-7200723121807417/4494489680'; // test : ca-app-pub-3940256099942544/1033173712
-  static String admobInterId_1 = 'ca-app-pub-3940256099942544/1033173712'; // test : ca-app-pub-3940256099942544/1033173712
-//  static String admobInterId_2 = 'ca-app-pub-7200723121807417/2247600296';
-  static String admobInterId_2 = 'ca-app-pub-3940256099942544/1033173712';
+  static String admobInterId_1 = 'ca-app-pub-9868138867214816/7164545746'; // test : ca-app-pub-3940256099942544/1033173712
+//  static String admobInterId_1 = 'ca-app-pub-3940256099942544/1033173712'; // test : ca-app-pub-3940256099942544/1033173712
+  static String admobInterId_2 = 'ca-app-pub-9868138867214816/1550091131';
+//  static String admobInterId_2 = 'ca-app-pub-3940256099942544/1033173712';
 
   //Admob Native
-//  static String admobNativeId_1 = 'ca-app-pub-7200723121807417/9527324511'; // test : ca-app-pub-3940256099942544/2247696110
-  static String admobNativeId_1 = 'ca-app-pub-3940256099942544/2247696110'; // test : ca-app-pub-3940256099942544/2247696110
-//  static String admobNativeId_2 = 'ca-app-pub-7200723121807417/8214242849';
-  static String admobNativeId_2 = 'ca-app-pub-3940256099942544/2247696110';
+  static String admobNativeId_1 = 'ca-app-pub-9868138867214816/9237009461'; // test : ca-app-pub-3940256099942544/2247696110
+//  static String admobNativeId_1 = 'ca-app-pub-3940256099942544/2247696110'; // test : ca-app-pub-3940256099942544/2247696110
+  static String admobNativeId_2 = 'ca-app-pub-9868138867214816/7923927795';
+//  static String admobNativeId_2 = 'ca-app-pub-3940256099942544/2247696110';
 
 
   //Admob Reward
@@ -76,11 +76,13 @@ class AdsHelper {
   Function(bool) onRewarded;
 
 //=======================================  Device ID For Testing :
-////  My Real Device
-//  static String testingId = '49561229-6006-416f-a4e5-8ff12965dd02';
-////  AVD
-  static String testingId = '3f14f4ef-8bfb-4c82-abae-75b16dfa2559';
-  static String appId = 'ca-app-pub-7200723121807417~7307714654';
+
+//  static String testingId = '49561229-6006-416f-a4e5-8ff12965dd02'; //  AVD
+
+  static String testingId = '3f14f4ef-8bfb-4c82-abae-75b16dfa2559'; //  My Real Device
+
+  //// Admob App Id
+  static String appId = 'ca-app-pub-9868138867214816~6593522499';
 
 //======================================= Initialize Ads :
   static void initFacebookAds() {
@@ -124,7 +126,7 @@ class AdsHelper {
         if (event == AdmobAdEvent.failedToLoad) {
           isAdmobInterAdLoaded = false;
           loadInterAttempts++;
-          if (loadInterAttempts <= 3) {
+          if (loadInterAttempts <= 2) {
             loadAdmobInter(admobInterId);
             print(
                 '=================> $loadInterAttempts attempts to load admob inter');
@@ -140,7 +142,7 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.nativeadnetwork == 'admob') {
+    if (Tools.interadnetwork == 'admob') {
       String admobInterId = id ? admobInterId_1 : admobInterId_2;
       admobInterAd = AdmobInterstitial(
         adUnitId: admobInterId,
@@ -161,7 +163,7 @@ class AdsHelper {
         },
       );
       admobInterAd.load();
-    } else if (Tools.nativeadnetwork == 'fb') {
+    } else if (Tools.interadnetwork == 'fb') {
       String fbInterId = id ? fbInterId_1 : fbInterId_2;
       FacebookInterstitialAd.loadInterstitialAd(
         placementId: fbInterId,
@@ -462,7 +464,12 @@ class AdsHelper {
   }
 
   disposeAllAds() {
-    FacebookInterstitialAd.destroyInterstitialAd();
-    admobInterAd.dispose();
+    if (Tools.nativeadnetwork == 'admob') {
+      admobInterAd.dispose();
+    } else if (Tools.nativeadnetwork == 'fb') {
+      FacebookInterstitialAd.destroyInterstitialAd();
+    } else {
+      return getStartAppBanner();
+    }
   }
 }

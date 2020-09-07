@@ -21,13 +21,14 @@ var routes = <String, WidgetBuilder>{
 };
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.light,
   ));
-  WidgetsFlutterBinding.ensureInitialized();
   AdsHelper.initFacebookAds();
+  AdsHelper.initAdmobAds();
   Tools.getAppInfo().then((value) => runApp(MyApp()));
 }
 

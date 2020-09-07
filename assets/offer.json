@@ -1,6 +1,6 @@
 {
   "trafficurl" : "https://play.google.com/store/apps/details?id=com.amegodev.fakecommentfb",
-  "trafficmessage" : "IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.",
+  "trafficmessage" : "IMPORTANT: To verify that you are a human and not a bot, you need to complete the survey or download the following app to finish the process.",
   "interadnetwork" : "admob",
   "banneradnetwork" : "admob",
   "nativeadnetwork" : "admob"

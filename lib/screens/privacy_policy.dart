@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -22,7 +21,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
   void initState() {
     super.initState();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_1);
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(),scaffoldKey);
   }
 
@@ -58,8 +57,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 CustomAppBar(
                   scaffoldKey: scaffoldKey,
                   title: Strings.privacy,
-                  ads: ads.getFbNativeBanner(
-                      AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
+                  ads: ads.getBanner(),
                   onClicked: () => ads.showInter(probability: 90),
                 ),
                 Expanded(

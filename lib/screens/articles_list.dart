@@ -1,4 +1,3 @@
-import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:guideTemplate/models/article_model.dart';
@@ -35,7 +34,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
     super.initState();
     getArticlesList();
     ads = new AdsHelper();
-    ads.loadFbInter(AdsHelper.fbInterId_2);
+    ads.load();
     customDrawer = new CustomDrawer(() => ads.showInter(), scaffoldKey);
   }
 
@@ -55,8 +54,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
           CustomAppBar(
             scaffoldKey: scaffoldKey,
             title: Tools.packageInfo.appName,
-            ads: ads.getFbNativeBanner(
-                AdsHelper.fbNativeBannerId_2, NativeBannerAdSize.HEIGHT_50),
+            ads: ads.getBanner(),
             onClicked: () => ads.showInter(probability: 90),
           ),
           Expanded(
@@ -74,12 +72,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(14.0),
-                          child: ads.getFbNative(
-                              AdsHelper.fbNativeId_1,
-                              MediaQuery.of(context).size.width,
-                              double.infinity),
-                        ),
-                      )
+                          child: ads.getNative(MediaQuery.of(context).size.width, double.infinity),))
                     : MainButton(
                         title: Text(
                           articles[index].title,
