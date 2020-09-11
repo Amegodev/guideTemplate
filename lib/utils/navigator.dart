@@ -17,7 +17,6 @@ class MyNavigator {
     Navigator.pushReplacementNamed(context, "/fetching");
   }
 
-
   static void goTryAgain(BuildContext context) {
     Navigator.pushReplacementNamed(context, "/try");
   }

@@ -13,6 +13,9 @@ import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 
 class Tools {
+  static double width = 100.0;
+  static double height = 100.0;
+
   static PackageInfo packageInfo = PackageInfo(
     appName: ' ',
     packageName: ' ',
@@ -20,16 +23,30 @@ class Tools {
     buildNumber: ' ',
   );
 
-  //===================================> Ads Type
-  static String trafficurl = 'https://play.google.com/store/apps/details?id=com.amegodev.fakecommentfb';
-  static String trafficmessage = 'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.';
+  //===================================> Config
+  static Map config = {};
+  static String trafficurl =
+      'https://play.google.com/store/apps/details?id=com.amegodev.fakecommentfb';
+  static String trafficmessage =
+      'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.';
   static String interadnetwork = 'startapp';
-  static String banneradnetwork = 'fb';
-  static String nativeadnetwork = 'fb';
+  static String banneradnetwork = 'startapp';
+  static String nativeadnetwork = 'startapp';
+
+  static String admobNetwork = 'startapp';
+  static String fbNetwork = 'startapp';
 
   static Future<void> getAppInfo() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
     packageInfo = info;
+    print("===( Future )============= packageInfo ======================> : " +
+        packageInfo.toString());
+    return;
+  }
+
+  static getDeviceDimention(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
   }
 
   static launchURLRate() async {
@@ -57,7 +74,7 @@ class Tools {
     }
   }
 
-  static Future<String> copyDataBase() async {
+  static Future<void> copyDataBase() async {
     String path = '';
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
@@ -76,14 +93,15 @@ class Tools {
 
       // Save copied asset to documents
       await new File(path).writeAsBytes(bytes);
-      print("==============================> Item Copied : $path");
+      print(
+          "===( Future )============= Item Copied ======================> : $path");
       /*  }else{
         print("==============================> Database Already Exist!");
       } */
     } catch (e) {
       print("Erreur Copie : $e");
     }
-    return path;
+    return;
   }
 
   static List shuffle(List items, int start, int end) {
@@ -100,22 +118,16 @@ class Tools {
     return items.sublist(start, end);
   }
 
-  static Future<Map> fetchData() async {
-    Map link;
+  static Future<void> fetchData() async {
     String url = Strings.jsonUrl;
     var res = await http.get(Uri.encodeFull(url));
     if (res.statusCode == 200) {
       var data = json.decode(res.body);
-      var rest = data;
-      trafficurl = data["trafficurl"];
-      trafficmessage = data["trafficmessage"];
-      interadnetwork = data["interadnetwork"];
-      banneradnetwork = data["banneradnetwork"];
-      nativeadnetwork = data["nativeadnetwork"];
-      link = rest;
+      config = data;
     }
-    print("================ body ====================== : " + res.body);
-    return link;
+    print("===( Future )============= config body ======================> : " +
+        config.toString());
+    return;
   }
 
   static void openWebView({String url, VoidCallback onClose}) async {

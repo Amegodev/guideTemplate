@@ -6,6 +6,7 @@ import 'package:guideTemplate/screens/fetching_page.dart';
 import 'package:guideTemplate/screens/home.dart';
 import 'package:guideTemplate/screens/privacy_policy.dart';
 import 'package:guideTemplate/screens/servers_page.dart';
+import 'package:guideTemplate/screens/slash_page.dart';
 import 'package:guideTemplate/screens/try_again_page.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
 import 'package:guideTemplate/utils/tools.dart';
@@ -29,7 +30,7 @@ void main() {
   ));
   AdsHelper.initFacebookAds();
   AdsHelper.initAdmobAds();
-  Tools.getAppInfo().then((value) => runApp(MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Montserrat'),
       routes: routes,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
