@@ -78,15 +78,25 @@ class _ArticleScreenState extends State<ArticleScreen> {
             ),
             Expanded(
               child: article == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
+                  ? Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                    child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                  )
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: SingleChildScrollView(
                         child: HtmlWidget(
                           article.body.replaceAll("\n", "</br>"),
                           textStyle: TextStyle(fontSize: 16),
+                          customWidgetBuilder: (element) {
+                            if (element.attributes['type'] == 'banner') {
+                              return ads.getBanner();
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ),

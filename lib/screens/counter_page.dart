@@ -46,33 +46,29 @@ class _CounterPageState extends State<CounterPage>
                   title: Text(
                     'We are almost done',
                   ),
-                  content: Text(
-                      Tools.trafficmessage),
+                  content: Text(Tools.config.trafficMessage),
                   actions: <Widget>[
                     FlatButton(
                       child: Text('OK'),
                       onPressed: () {
                         Tools.openWebView(
-                            url: Tools.trafficurl,
+                            url: Tools.config.trafficUrl,
                             onClose: () {
                               showDialog(
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (_) {
                                     return AlertDialog(
-                                      title:
-                                      Text('Process finished'),
+                                      title: Text('Process finished'),
                                       content: Text(
                                           'Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t get access to any server in 24 hours please run the process again following ALL previous steps.'),
                                       actions: <Widget>[
                                         FlatButton(
                                           child: Text('OK'),
                                           onPressed: () {
-                                            Navigator.of(context)
-                                                .pop();
+                                            Navigator.of(context).pop();
                                             ads.showInter();
-                                            MyNavigator.goServers(
-                                                context);
+                                            MyNavigator.goServers(context);
                                           },
                                         )
                                       ],
@@ -233,26 +229,31 @@ class _CounterPageState extends State<CounterPage>
                                                       title: Text(
                                                         'We are almost done',
                                                       ),
-                                                      content: Text(
-                                                          Tools.trafficmessage),
-                                                      actions: <
-                                                          Widget>[
+                                                      content: Text(Tools.config
+                                                          .trafficMessage),
+                                                      actions: <Widget>[
                                                         FlatButton(
-                                                          child: Text(
-                                                              'OK'),
-                                                          onPressed:
-                                                              () {
+                                                          child: Text('OK'),
+                                                          onPressed: () {
                                                             Tools.openWebView(
-                                                                url: Tools.trafficurl,
+                                                                url: Tools
+                                                                    .config
+                                                                    .trafficUrl,
                                                                 onClose: () {
                                                                   showDialog(
-                                                                      barrierDismissible: false,
-                                                                      context: context,
-                                                                      builder: (_) {
+                                                                      barrierDismissible:
+                                                                          false,
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (_) {
                                                                         return AlertDialog(
-                                                                          title: Text('Process finished'),
-                                                                          content: Text('Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t received your followers in 24 hours please run the process again following ALL previous steps.'),
-                                                                          actions: <Widget>[
+                                                                          title:
+                                                                              Text('Process finished'),
+                                                                          content:
+                                                                              Text('Congratulations! The whole process has finished successfully. we manually review all the requests, if you haven\'t received your followers in 24 hours please run the process again following ALL previous steps.'),
+                                                                          actions: <
+                                                                              Widget>[
                                                                             FlatButton(
                                                                               child: Text('OK'),
                                                                               onPressed: () {
@@ -315,7 +316,8 @@ class _CounterPageState extends State<CounterPage>
                   decoration: BoxDecoration(
                     border: Border(top: BorderSide(color: Colors.grey)),
                   ),
-                  child: ads.getNative(MediaQuery.of(context).size.width, double.infinity),
+                  child: ads.getNative(
+                      MediaQuery.of(context).size.width, double.infinity),
                 ),
               ),
             ],

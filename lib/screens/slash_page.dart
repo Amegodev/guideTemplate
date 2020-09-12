@@ -18,20 +18,17 @@ class _SplashScreenState extends State<SplashScreen>
       Tools.copyDataBase(),
       Tools.fetchData(),
       Future.delayed(
-          Duration(seconds: 10),
+          Duration(seconds: 6),
           () => print(
               "===( Future )============= delayed ======================> : Just delayed"))
     ]).then((value) => MyNavigator.goHome(context));
-    /* Future.delayed(Duration(seconds: 5), () async {
-      
-    }); */
   }
 
   @override
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 700), vsync: this);
+        duration: const Duration(milliseconds: 1000), vsync: this);
     controller.repeat(reverse: true);
     initThenGoHomeScreen();
   }
@@ -50,17 +47,34 @@ class _SplashScreenState extends State<SplashScreen>
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          color: MyColors.grey1,
+          color: MyColors.white,
         ),
-        child: Center(
-          child: ScaleTransition(
-            scale: Tween(begin: 1.0, end: 1.2).animate(
-                CurvedAnimation(parent: controller, curve: Curves.ease)),
-            child: Image.asset(
-              'assets/icon.png',
-              width: 100.0,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: SizedBox(),
             ),
-          ),
+            Expanded(
+              flex: 4,
+              child: Container(
+                child: Center(
+                  child: ScaleTransition(
+                    scale: Tween(begin: 1.0, end: 1.1).animate(CurvedAnimation(
+                        parent: controller, curve: Curves.ease)),
+                    child: Image.asset(
+                      'assets/icon.png',
+                      width: Tools.width / 4,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text('Initializing...', style: MyTextStyles.bigTitle),
+            ),
+          ],
         ),
       ),
     );

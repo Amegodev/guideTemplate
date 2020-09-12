@@ -24,18 +24,7 @@ class Tools {
   );
 
   //===================================> Config
-  static Map config = {};
-  static String trafficurl =
-      'https://play.google.com/store/apps/details?id=com.amegodev.fakecommentfb';
-  static String trafficmessage =
-      'IMPORTANT: To verify that you are a human and not a bot, you need to complete the following survey to finish the process.';
-  static String interadnetwork = 'startapp';
-  static String banneradnetwork = 'startapp';
-  static String nativeadnetwork = 'startapp';
-
-  static String admobNetwork = 'startapp';
-  static String fbNetwork = 'startapp';
-
+  static Config config;
   static Future<void> getAppInfo() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
     packageInfo = info;
@@ -44,9 +33,26 @@ class Tools {
     return;
   }
 
+  static Future<void> fetchData() async {
+    config = new Config();
+    String url = Strings.jsonUrl;
+    var res = await http.get(Uri.encodeFull(url));
+    if (res.statusCode == 200) {
+      var data = json.decode(res.body);
+      config.trafficUrl = data["trafficurl"];
+      config.trafficMessage = data["trafficmessage"];
+      config.admob = data["admob"];
+      config.fb = data["fb"];
+    }
+    print("===( Future )============= config body ======================> : " +
+        config.toString());
+    return;
+  }
+
   static getDeviceDimention(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+    print("===( width )===> $width\n===( height )===> $height");
   }
 
   static launchURLRate() async {
@@ -118,18 +124,6 @@ class Tools {
     return items.sublist(start, end);
   }
 
-  static Future<void> fetchData() async {
-    String url = Strings.jsonUrl;
-    var res = await http.get(Uri.encodeFull(url));
-    if (res.statusCode == 200) {
-      var data = json.decode(res.body);
-      config = data;
-    }
-    print("===( Future )============= config body ======================> : " +
-        config.toString());
-    return;
-  }
-
   static void openWebView({String url, VoidCallback onClose}) async {
     ChromeSafariBrowser browser =
         new MyChromeSafariBrowser(new MyInAppBrowser(), () => onClose());
@@ -187,5 +181,25 @@ class MyChromeSafariBrowser extends ChromeSafariBrowser {
   void onClosed() {
     onClose();
     print("ChromeSafari browser closed");
+  }
+}
+
+class Config {
+  String trafficUrl;
+  String trafficMessage;
+  Map admob;
+  Map fb;
+
+  @override
+  toString() {
+    String text = "trafficUrl : " +
+        this.trafficUrl +
+        ", \ntrafficMessage : " +
+        this.trafficMessage +
+        ", \nadmob : " +
+        this.admob.toString() +
+        ", \nfb : " +
+        this.fb.toString();
+    return text;
   }
 }

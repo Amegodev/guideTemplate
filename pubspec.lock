@@ -412,7 +412,7 @@ packages:
       name: startapp
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0"
+    version: "0.5.1"
   stream_channel:
     dependency: transitive
     description:

@@ -9,7 +9,6 @@ import 'package:guideTemplate/screens/servers_page.dart';
 import 'package:guideTemplate/screens/slash_page.dart';
 import 'package:guideTemplate/screens/try_again_page.dart';
 import 'package:guideTemplate/utils/ads_helper.dart';
-import 'package:guideTemplate/utils/tools.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),

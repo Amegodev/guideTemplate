@@ -32,30 +32,31 @@ class AdsHelper {
 
 //===================================> Admob Ads:
   //Admob Banner
-  static String admobBannerId_1 = 'ca-app-pub-9868138867214816/3208988867'; // test : ca-app-pub-3940256099942544/6300978111
+  static String admobBannerId_1 =
+      'ca-app-pub-9868138867214816/3208988867'; // test : ca-app-pub-3940256099942544/6300978111
 //  static String admobBannerId_1 = 'ca-app-pub-3940256099942544/6300978111'; // test : ca-app-pub-3940256099942544/6300978111
   static String admobBannerId_2 = 'ca-app-pub-9868138867214816/6042024000';
 //  static String admobBannerId_2 = 'ca-app-pub-3940256099942544/6300978111';
 
   //Admob Inter
-  static String admobInterId_1 = 'ca-app-pub-9868138867214816/7164545746'; // test : ca-app-pub-3940256099942544/1033173712
+  static String admobInterId_1 =
+      'ca-app-pub-9868138867214816/7164545746'; // test : ca-app-pub-3940256099942544/1033173712
 //  static String admobInterId_1 = 'ca-app-pub-3940256099942544/1033173712'; // test : ca-app-pub-3940256099942544/1033173712
   static String admobInterId_2 = 'ca-app-pub-9868138867214816/1550091131';
 //  static String admobInterId_2 = 'ca-app-pub-3940256099942544/1033173712';
 
   //Admob Native
-  static String admobNativeId_1 = 'ca-app-pub-9868138867214816/9237009461'; // test : ca-app-pub-3940256099942544/2247696110
+  static String admobNativeId_1 =
+      'ca-app-pub-9868138867214816/9237009461'; // test : ca-app-pub-3940256099942544/2247696110
 //  static String admobNativeId_1 = 'ca-app-pub-3940256099942544/2247696110'; // test : ca-app-pub-3940256099942544/2247696110
   static String admobNativeId_2 = 'ca-app-pub-9868138867214816/7923927795';
 //  static String admobNativeId_2 = 'ca-app-pub-3940256099942544/2247696110';
-
 
   //Admob Reward
   static String admobRewardId_1 =
       ''; // test : ca-app-pub-3940256099942544/5224354917
   static String admobRewardId_2 =
       ''; // test : ca-app-pub-3940256099942544/5224354917
-
 
   int loadInterAttempts = 0;
 
@@ -79,10 +80,11 @@ class AdsHelper {
 
 //  static String testingId = '49561229-6006-416f-a4e5-8ff12965dd02'; //  AVD
 
-  static String testingId = '3f14f4ef-8bfb-4c82-abae-75b16dfa2559'; //  My Real Device
+  static String testingId =
+      '3f14f4ef-8bfb-4c82-abae-75b16dfa2559'; //  My Real Device
 
   //// Admob App Id
-  static String appId = 'ca-app-pub-9868138867214816~6593522499';
+  static String appId = 'ca-app-pub-3940256099942544~3347511713';
 
 //======================================= Initialize Ads :
   static void initFacebookAds() {
@@ -142,8 +144,10 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.interadnetwork == 'admob') {
-      String admobInterId = id ? admobInterId_1 : admobInterId_2;
+    if (Tools.config.admob["admob"] == 'true') {
+      String admobInterId = id
+          ? Tools.config.admob["admob"]["inter1"]
+          : Tools.config.admob["admob"]["inter2"];
       admobInterAd = AdmobInterstitial(
         adUnitId: admobInterId,
         listener: (AdmobAdEvent event, Map<String, dynamic> args) {
@@ -163,8 +167,12 @@ class AdsHelper {
         },
       );
       admobInterAd.load();
-    } else if (Tools.interadnetwork == 'fb') {
-      String fbInterId = id ? fbInterId_1 : fbInterId_2;
+    } else
+      print("Admob Ads inactive");
+    if (Tools.config.admob["admob"] == 'true') {
+      String fbInterId = id
+          ? Tools.config.admob["fb"]["inter1"]
+          : Tools.config.admob["fb"]["inter1"];
       FacebookInterstitialAd.loadInterstitialAd(
         placementId: fbInterId,
         listener: (result, value) {
@@ -183,7 +191,8 @@ class AdsHelper {
           print("===(Fb Inter)===> result : $result =====> value : $value");
         },
       );
-    } else {}
+    } else
+      print("Fb Ads inactive");
   }
 
   loadAdmobReward(String admobRewardId) {
@@ -250,25 +259,18 @@ class AdsHelper {
     bool result = r.nextDouble() > falseProbability;
     if (isFbInterAdLoaded || isAdmobInterAdLoaded) {
       if (result) {
-        /*Random rr = new Random();
-      if (rr.nextBool()) {
-//        await StartApp.showInterstitialAd();
-//        showFbInter(delay);
-      } else {
-//        showAdmobInter(delay: delay);
-      }*/
-        if (Tools.interadnetwork == 'admob') {
+        if (Tools.config.admob["admob"] == 'true') {
           isAdmobInterAdLoaded
               ? showAdmobInter(delay: delay)
               : showStartAppInter();
-        } else if (Tools.interadnetwork == 'fb') {
+        } else if (Tools.config.admob["fb"] == 'true') {
           isFbInterAdLoaded ? showFbInter(delay) : showStartAppInter();
         } else {
           showStartAppInter();
         }
       }
       print(
-          '===> Probablity of $probability% return ( $result ) with AdNetwork : ( ${Tools.interadnetwork} )');
+          '===> Probablity of $probability% return ( $result ) with AdNetwork : ( ${Tools.config} )');
     } else {
       showStartAppInter();
       print('===> No AdNetwork Inter Loaded Showing startapp Instead');
@@ -308,6 +310,9 @@ class AdsHelper {
           buttonBorderColor: Colors.black,
           listener: (result, value) {
             print("===(Fb NativeBanner)===> $value");
+            if(result == NativeAdResult.ERROR){
+              return null;
+            }
           },
         ),
       );
@@ -398,9 +403,7 @@ class AdsHelper {
 
   Widget getStartAppBanner() {
     if (startAppBannerAd == null) {
-      startAppBannerAd = Container(
-        child: AdBanner(),
-      );
+      startAppBannerAd = AdBanner();
     }
     return startAppBannerAd;
   }
@@ -409,15 +412,17 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.banneradnetwork == 'admob') {
-      return getAdmobBanner(
-              id ? AdsHelper.admobBannerId_1 : AdsHelper.admobBannerId_2,
-              AdmobBannerSize.BANNER) ??
+    if (Tools.config.admob["admob"] == 'true') {
+      String admobBannerId = id
+          ? Tools.config.admob["admob"]["banner1"]
+          : Tools.config.admob["admob"]["banner2"];
+      return getAdmobBanner(admobBannerId, AdmobBannerSize.BANNER) ??
           getStartAppBanner();
-    } else if (Tools.banneradnetwork == 'fb') {
-      return getFbNativeBanner(
-              id ? AdsHelper.fbNativeBannerId_1 : AdsHelper.fbNativeBannerId_2,
-              NativeBannerAdSize.HEIGHT_50) ??
+    } else if (Tools.config.admob["fb"] == 'true') {
+      String fbBannerId = id
+          ? Tools.config.admob["fb"]["nativebanner1"]
+          : Tools.config.admob["fb"]["nativebanner2"];
+      return getFbNativeBanner(fbBannerId, NativeBannerAdSize.HEIGHT_50) ??
           getStartAppBanner();
     } else {
       return getStartAppBanner();
@@ -428,16 +433,17 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.nativeadnetwork == 'admob') {
-      return getAdmobNative(
-              id ? AdsHelper.admobNativeId_1 : AdsHelper.admobNativeId_2,
-              height,
-              width) ??
+    if (Tools.config.admob["admob"] == 'true') {
+      String admobNativeId = id
+          ? Tools.config.admob["admob"]["native1"]
+          : Tools.config.admob["admob"]["native2"];
+      return getAdmobNative(admobNativeId, height, width) ??
           getStartAppBanner();
-    } else if (Tools.nativeadnetwork == 'fb') {
-      return getFbNative(id ? AdsHelper.fbNativeId_1 : AdsHelper.fbNativeId_2,
-              height, width) ??
-          getStartAppBanner();
+    } else if (Tools.config.admob["fb"] == 'true') {
+      String fbNativeId = id
+          ? Tools.config.admob["fb"]["native1"]
+          : Tools.config.admob["fb"]["native2"];
+      return getFbNative(fbNativeId, height, width) ?? getStartAppBanner();
     } else {
       return getStartAppBanner();
     }
@@ -447,16 +453,18 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.nativeadnetwork == 'admob') {
-      return getAdmobNative(
-              id ? AdsHelper.admobNativeId_1 : AdsHelper.admobNativeId_2,
-              50.0,
-              double.infinity) ??
+    if (Tools.config.admob["admob"] == 'true') {
+      String admobNativeBannerId = id
+          ? Tools.config.admob["admob"]["native1"]
+          : Tools.config.admob["admob"]["native2"];
+      return getAdmobNative(admobNativeBannerId, 50.0, double.infinity) ??
           getStartAppBanner();
-    } else if (Tools.nativeadnetwork == 'fb') {
+    } else if (Tools.config.admob["fb"] == 'true') {
+      String fbNativeBannerId = id
+          ? Tools.config.admob["fb"]["nativebanner1"]
+          : Tools.config.admob["fb"]["nativeBanner2"];
       return getFbNativeBanner(
-              id ? AdsHelper.fbNativeId_1 : AdsHelper.fbNativeId_2,
-              NativeBannerAdSize.HEIGHT_50) ??
+              fbNativeBannerId, NativeBannerAdSize.HEIGHT_50) ??
           getStartAppBanner();
     } else {
       return getStartAppBanner();
@@ -464,12 +472,11 @@ class AdsHelper {
   }
 
   disposeAllAds() {
-    if (Tools.nativeadnetwork == 'admob') {
+    if (Tools.config.admob["admob"] == 'true') {
       admobInterAd.dispose();
-    } else if (Tools.nativeadnetwork == 'fb') {
+    }
+    if (Tools.config.admob["fb"] == 'true') {
       FacebookInterstitialAd.destroyInterstitialAd();
-    } else {
-      return getStartAppBanner();
     }
   }
 }
