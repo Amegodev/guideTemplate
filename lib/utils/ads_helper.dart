@@ -336,7 +336,6 @@ class AdsHelper {
   }
 
   Widget getAdmobNative(String admobNativeId, double width, double height) {
-    bool filled = false;
     admobNativeController.setTestDeviceIds([AdsHelper.testingId]);
 //    _controller.setNonPersonalizedAds(true);
     if (admobNativeAd == null) {

@@ -5,7 +5,6 @@ import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/strings.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
-import 'package:guideTemplate/widgets/dialogs.dart';
 import 'package:guideTemplate/widgets/drawer.dart';
 import 'package:guideTemplate/widgets/widgets.dart';
 

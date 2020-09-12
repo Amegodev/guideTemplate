@@ -4,7 +4,6 @@ import 'package:guideTemplate/utils/navigator.dart';
 import 'package:guideTemplate/utils/strings.dart';
 import 'package:guideTemplate/utils/theme.dart';
 import 'package:guideTemplate/utils/tools.dart';
-import 'package:guideTemplate/widgets/dialogs.dart';
 
 class CustomDrawer {
   final VoidCallback onClicked;
