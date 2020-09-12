@@ -11,7 +11,7 @@ class Strings {
   static final String jsonUrl =
       "https://raw.githubusercontent.com/Hakim-Allaoui/guideTemplate/hi_neighbor/assets/config.json";
   static final String aboutText =
-      """QooApp Walkthough : what it is and how to use it\nHere's everything you need to know about one of the most popular apps right now
+      """${Tools.packageInfo.appName} : what it is and how to use it\nHere's everything you need to know about one of the most popular app right now
   """;
   static final String ratingText = """We need your support 🤗""";
   static final List<String> servers = [

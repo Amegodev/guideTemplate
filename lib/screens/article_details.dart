@@ -79,12 +79,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
             Expanded(
               child: article == null
                   ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                    child: Center(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Center(
                         child: CircularProgressIndicator(),
                       ),
-                  )
+                    )
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: SingleChildScrollView(
@@ -93,6 +93,9 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           textStyle: TextStyle(fontSize: 16),
                           customWidgetBuilder: (element) {
                             if (element.attributes['type'] == 'banner') {
+                              return ads.getBanner();
+                            }
+                            if (element.attributes['type'] == 'nativebanner') {
                               return ads.getBanner();
                             }
                             return null;

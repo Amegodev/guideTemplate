@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:guideTemplate/screens/about_page.dart';
 import 'package:guideTemplate/screens/articles_list.dart';
 import 'package:guideTemplate/screens/counter_page.dart';
 import 'package:guideTemplate/screens/fetching_page.dart';
@@ -18,6 +19,7 @@ var routes = <String, WidgetBuilder>{
   "/try": (BuildContext context) => TryAgainPage(),
   "/privacy": (BuildContext context) => PrivacyScreen(),
   "/articles": (BuildContext context) => ArticlesScreen(),
+  "/about": (BuildContext context) => AboutPage(),
 };
 
 void main() {

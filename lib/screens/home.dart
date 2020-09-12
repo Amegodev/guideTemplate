@@ -140,28 +140,7 @@ class _HomeScreeState extends State<HomeScreen> {
                     ),
                     svgIcon: 'assets/icons/about.svg',
                     onClicked: () async {
-                      showDialog(
-                          context: context,
-                          builder: (_) => RatingDialog()).then((value) {
-                        if (value == null) {
-                          ads.showInter();
-                          return;
-                        }
-                        String text = '';
-                        if (value <= 3) {
-                          ads.showInter();
-                          if (value <= 2)
-                            text =
-                                'Your rating was $value ☹ alright, thank you.';
-                          if (value == 3) text = 'Thanks for your rating 🙂';
-                        } else if (value >= 4)
-                          text = 'Thanks for your rating 😀';
-                        scaffoldKey.currentState.showSnackBar(
-                          new SnackBar(
-                            content: Text(text),
-                          ),
-                        );
-                      });
+                      MyNavigator.goAbout(context);
                     },
                   ),
                 ),

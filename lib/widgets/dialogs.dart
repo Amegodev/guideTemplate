@@ -43,39 +43,56 @@ class _RatingDialogState extends State<RatingDialog> {
                 Container(
                   height: 80,
                   width: 80,
-                  child: Image.asset('assets/icon.png'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image.asset('assets/icon.png'),
+                  ),
                 ),
-                SizedBox(width: 10.0,),
+                SizedBox(
+                  width: 10.0,
+                ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          Tools.packageInfo.appName,
-                          style: MyTextStyles.bigTitle.apply(color: MyColors.black),
-                        ),
-                        Text(
-                          'version '+Tools.packageInfo.version,
-                          style: MyTextStyles.subTitle,
-                        ),
-                      ],
-                    ))
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Tools.packageInfo.appName,
+                      style: MyTextStyles.bigTitle.apply(color: MyColors.black),
+                    ),
+                    Text(
+                      'version ' + Tools.packageInfo.version,
+                      style: MyTextStyles.subTitle,
+                    ),
+                  ],
+                ))
               ],
             ),
-            SizedBox(height: 20.0,),
-            Text(Strings.ratingText, textAlign: TextAlign.center, style: MyTextStyles.subTitle,),
-            Text('👇 Please Rate App 👇', textAlign: TextAlign.center, style: MyTextStyles.subTitle,),
           ],
         ),
       ),
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildStar(1),
-          _buildStar(2),
-          _buildStar(3),
-          _buildStar(4),
-          _buildStar(5),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            Strings.ratingText,
+            textAlign: TextAlign.center,
+            style: MyTextStyles.subTitle,
+          ),
+          Text(
+            '👇 Please Rate App 👇',
+            textAlign: TextAlign.center,
+            style: MyTextStyles.subTitle,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              _buildStar(1),
+              _buildStar(2),
+              _buildStar(3),
+              _buildStar(4),
+              _buildStar(5),
+            ],
+          ),
         ],
       ),
       actions: <Widget>[

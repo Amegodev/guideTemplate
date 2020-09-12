@@ -26,10 +26,13 @@ class CustomDrawer {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
-                      child: Image.asset(
-                        'assets/icon.png',
-                        width: 100.0,
-                        fit: BoxFit.cover,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15.0),
+                        child: Image.asset(
+                          'assets/icon.png',
+                          width: 100.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Tools.packageInfo == null

@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
       Tools.copyDataBase(),
       Tools.fetchData(),
       Future.delayed(
-          Duration(seconds: 6),
+          Duration(seconds: 8),
           () => print(
               "===( Future )============= delayed ======================> : Just delayed"))
     ]).then((value) => MyNavigator.goHome(context));
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+        duration: const Duration(milliseconds: 500), vsync: this);
     controller.repeat(reverse: true);
     initThenGoHomeScreen();
   }
@@ -62,9 +62,12 @@ class _SplashScreenState extends State<SplashScreen>
                   child: ScaleTransition(
                     scale: Tween(begin: 1.0, end: 1.1).animate(CurvedAnimation(
                         parent: controller, curve: Curves.ease)),
-                    child: Image.asset(
-                      'assets/icon.png',
-                      width: Tools.width / 4,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.asset(
+                        'assets/icon.png',
+                        width: Tools.width / 4,
+                      ),
                     ),
                   ),
                 ),

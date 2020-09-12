@@ -84,7 +84,7 @@ class AdsHelper {
       '3f14f4ef-8bfb-4c82-abae-75b16dfa2559'; //  My Real Device
 
   //// Admob App Id
-  static String appId = 'ca-app-pub-3940256099942544~3347511713';
+  static String appId = 'ca-app-pub-7200723121807417~8921314692';
 
 //======================================= Initialize Ads :
   static void initFacebookAds() {
@@ -425,11 +425,10 @@ class AdsHelper {
       return getAdmobNative(admobNativeBannerId, 50.0, double.infinity) ??
           getStartAppBanner();
     } else if (Tools.config.fb["active"] == 'true') {
-      String fbNativeBannerId = id
+      String fbBannerId = id
           ? Tools.config.fb["nativebanner1"]
-          : Tools.config.fb["nativeBanner2"];
-      return getFbNativeBanner(
-              fbNativeBannerId, NativeBannerAdSize.HEIGHT_50) ??
+          : Tools.config.fb["nativebanner2"];
+      return getFbNativeBanner(fbBannerId, NativeBannerAdSize.HEIGHT_50) ??
           getStartAppBanner();
     } else {
       return getStartAppBanner();
