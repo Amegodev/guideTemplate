@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.karimstoreappsfall.guysultimate"
+        applicationId "com.qooappwalkthrough.happycheckguide"
         minSdkVersion 17
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()

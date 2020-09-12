@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.karimstoreappsfall.guysultimate">
+    package="com.qooappwalkthrough.happycheckguide">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
@@ -8,9 +8,9 @@
         android:icon="@mipmap/ic_launcher">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7200723121807417~8921314692"/>
-        <meta-data android:name="com.startapp.sdk.APPLICATION_ID" android:value="208737255" />
-        <meta-data android:name="com.startapp.sdk.RETURN_ADS_ENABLED" android:value="false" /> 
+            android:value="ca-app-pub-7200723121807417~7307714654"/>
+        <meta-data android:name="com.startapp.sdk.APPLICATION_ID" android:value="208521880" />
+<!--        <meta-data android:name="com.startapp.sdk.RETURN_ADS_ENABLED" android:value="false" /> -->
         <meta-data android:name="vn.momo.plugin.startapp.SPLASH_AD_ENABLED" android:value="false" />
         <activity
             android:name=".MainActivity"

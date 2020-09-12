@@ -87,7 +87,7 @@ class AdsHelper {
       '3f14f4ef-8bfb-4c82-abae-75b16dfa2559'; //  My Real Device
 
   //// Admob App Id
-  static String appId = 'ca-app-pub-7200723121807417~8921314692';
+  static String appId = 'ca-app-pub-7200723121807417~7307714654';
 
 //======================================= Initialize Ads :
   static void initFacebookAds() {

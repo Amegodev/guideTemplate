@@ -1,4 +1,4 @@
-package com.karimstoreappsfall.guysultimate
+package com.qooappwalkthrough.happycheckguide
 
 import io.flutter.embedding.android.FlutterActivity
 
