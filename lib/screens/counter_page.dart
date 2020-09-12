@@ -114,7 +114,7 @@ class _CounterPageState extends State<CounterPage>
                     scaffoldKey: scaffoldKey,
                     ads: ads.getBanner(),
                     title: Tools.packageInfo.appName,
-                    bgColor: Color(0xFFF1A737),
+                    bgColor: Color(0xFF74B3D2),
                     onClicked: () => ads.showInter(probability: 90),
                   ),
                   Container(
@@ -140,7 +140,7 @@ class _CounterPageState extends State<CounterPage>
                             height: MediaQuery.of(context).size.width * 1.485,
                             width: MediaQuery.of(context).size.width * 1.485,
                             decoration: BoxDecoration(
-                              color: Color(0xFFF1A737),
+                              color: Color(0xFF74B3D2),
                               shape: BoxShape.circle,
                             ),
                           ),

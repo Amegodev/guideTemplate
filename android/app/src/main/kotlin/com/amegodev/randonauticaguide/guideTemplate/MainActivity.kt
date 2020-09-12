@@ -1,4 +1,4 @@
-package com.myneighbour.hellogame
+package com.karimstoreappsfall.guysultimate
 
 import io.flutter.embedding.android.FlutterActivity
 

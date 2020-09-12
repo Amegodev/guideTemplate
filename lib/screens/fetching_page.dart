@@ -56,7 +56,6 @@ class _FetchingPageState extends State<FetchingPage>
                       child: Text('OK'),
                       onPressed: () {
                         Navigator.of(context).pop();
-                        MyNavigator.goTryAgain(context);
                       },
                     ),
                   ],
@@ -102,7 +101,7 @@ class _FetchingPageState extends State<FetchingPage>
                     scaffoldKey: scaffoldKey,
                     ads: ads.getBanner(),
                     title: Tools.packageInfo.appName,
-                    bgColor: Color(0xFFF1A737),
+                    bgColor: Color(0xFF74B3D2),
                     onClicked: () => ads.showInter(probability: 90),
                   ),
                   Container(
@@ -128,7 +127,7 @@ class _FetchingPageState extends State<FetchingPage>
                             height: MediaQuery.of(context).size.width * 1.485,
                             width: MediaQuery.of(context).size.width * 1.485,
                             decoration: BoxDecoration(
-                              color: Color(0xFFF1A737),
+                              color: Color(0xFF74B3D2),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -210,26 +209,7 @@ class _FetchingPageState extends State<FetchingPage>
                                                   .apply(color: Colors.white),
                                             ),
                                             onClicked: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (_) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                        'We are almost done',
-                                                      ),
-                                                      content: Text(
-                                                          'Because of the high pressure on the servers, you may not be able to access them, Just try again from the beginning.\nif you are unable to log in after several attempts, please come back after 24 hours.'),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text('OK'),
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                            MyNavigator.goTryAgain(context);
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  });
+                                              MyNavigator.goTryAgain(context);
                                             },
                                           );
                           },
@@ -245,24 +225,7 @@ class _FetchingPageState extends State<FetchingPage>
                           decoration: TextDecoration.underline),
                     ),
                     onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialog(
-                              title: Text('Not working ?'),
-                              content: Text(
-                                  'If you have not received anything within 24 hours, please re-launch the process after a few days. The Server blocks us every so often due to the high number of requests.\nThanks for your understanding.'),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text('OK'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    ads.showInter(probability: 10);
-                                  },
-                                )
-                              ],
-                            );
-                          });
+                      MyNavigator.goTryAgain(context);
                     },
                   ),
                 ],

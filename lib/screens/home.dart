@@ -54,7 +54,7 @@ class _HomeScreeState extends State<HomeScreen> {
                     'Start',
                     style: MyTextStyles.bigTitle,
                   ),
-                  bgColor: Color(0xFFF1A737),
+                  bgColor: Color(0xFF74B3D2),
                   svgIcon: 'assets/icons/play.svg',
                   onClicked: () {
                     ads.showInter();
@@ -66,7 +66,7 @@ class _HomeScreeState extends State<HomeScreen> {
                             'Next',
                             style: MyTextStyles.bigTitle,
                           ),
-                          bgColor: Color(0xFFF1A737),
+                          bgColor: Color(0xFF74B3D2),
                           svgIcon: 'assets/icons/play.svg',
                           onClicked: () {
                             ads.showInter();
@@ -82,7 +82,7 @@ class _HomeScreeState extends State<HomeScreen> {
                     'Walkthrough',
                     style: MyTextStyles.bigTitle,
                   ),
-                  bgColor: Color(0xFF00B5D9),
+                  bgColor: Color(0xFF74955E),
                   svgIcon: 'assets/icons/articles.svg',
                   onClicked: () {
                     ads.showInter();
@@ -94,7 +94,7 @@ class _HomeScreeState extends State<HomeScreen> {
                             'Next',
                             style: MyTextStyles.bigTitle,
                           ),
-                          bgColor: Color(0xFFF1A737),
+                          bgColor: Color(0xFF74B3D2),
                           svgIcon: 'assets/icons/articles.svg',
                           onClicked: () {
                             MyNavigator.goArticles(context);
@@ -108,7 +108,7 @@ class _HomeScreeState extends State<HomeScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: MainButton(
                     title: Text(
-                      'Our Store',
+                      'More Apps',
                       style: MyTextStyles.bigTitle,
                     ),
                     svgIcon: 'assets/icons/more_apps.svg',

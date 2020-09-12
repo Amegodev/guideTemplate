@@ -9,7 +9,7 @@ class Strings {
   static final String storeId = "6351844879181348391";
   static final String storeName = "Karim StoreApps";
   static final String jsonUrl =
-      "https://raw.githubusercontent.com/Hakim-Allaoui/guideTemplate/hi_neighbor/assets/config.json";
+      "https://raw.githubusercontent.com/Hakim-Allaoui/guideTemplate/fall_guys/assets/config.json";
   static final String aboutText =
       """${Tools.packageInfo.appName} : what it is and how to use it\nHere's everything you need to know about one of the most popular app right now
   """;

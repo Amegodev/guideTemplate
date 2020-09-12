@@ -6,19 +6,19 @@ class MyNavigator {
   }
 
   static void goCounter(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/counter");
+    Navigator.pushNamed(context, "/counter");
   }
 
   static void goServers(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/servers");
+    Navigator.pushNamed(context, "/servers");
   }
 
   static void goFetching(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/fetching");
+    Navigator.pushNamed(context, "/fetching");
   }
 
   static void goTryAgain(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/try");
+    Navigator.pushNamed(context, "/try");
   }
 
   static void goArticles(BuildContext context) {

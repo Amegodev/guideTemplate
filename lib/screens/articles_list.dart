@@ -61,7 +61,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
             child: ListView.builder(
               itemCount: articles.length,
               itemBuilder: (context, index) {
-                return index % 100 == 0 && index != 0
+                return index % 6 == 0 && index != 0
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         height: 300.0,

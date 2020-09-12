@@ -36,6 +36,7 @@ class AdsHelper {
       'ca-app-pub-9868138867214816/3208988867'; // test : ca-app-pub-3940256099942544/6300978111
 //  static String admobBannerId_1 = 'ca-app-pub-3940256099942544/6300978111'; // test : ca-app-pub-3940256099942544/6300978111
   static String admobBannerId_2 = 'ca-app-pub-9868138867214816/6042024000';
+
 //  static String admobBannerId_2 = 'ca-app-pub-3940256099942544/6300978111';
 
   //Admob Inter
@@ -43,6 +44,7 @@ class AdsHelper {
       'ca-app-pub-9868138867214816/7164545746'; // test : ca-app-pub-3940256099942544/1033173712
 //  static String admobInterId_1 = 'ca-app-pub-3940256099942544/1033173712'; // test : ca-app-pub-3940256099942544/1033173712
   static String admobInterId_2 = 'ca-app-pub-9868138867214816/1550091131';
+
 //  static String admobInterId_2 = 'ca-app-pub-3940256099942544/1033173712';
 
   //Admob Native
@@ -50,6 +52,7 @@ class AdsHelper {
       'ca-app-pub-9868138867214816/9237009461'; // test : ca-app-pub-3940256099942544/2247696110
 //  static String admobNativeId_1 = 'ca-app-pub-3940256099942544/2247696110'; // test : ca-app-pub-3940256099942544/2247696110
   static String admobNativeId_2 = 'ca-app-pub-9868138867214816/7923927795';
+
 //  static String admobNativeId_2 = 'ca-app-pub-3940256099942544/2247696110';
 
   //Admob Reward
@@ -145,16 +148,14 @@ class AdsHelper {
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
     if (Tools.config.admob["active"] == 'true') {
-      String admobInterId = id
-          ? Tools.config.admob["inter1"]
-          : Tools.config.admob["inter2"];
+      String admobInterId =
+          id ? Tools.config.admob["inter1"] : Tools.config.admob["inter2"];
       loadAdmobInter(admobInterId);
     } else
       print("xxxxxxxxxxxxxxxxxxxxxxxxxxx Admob Ads inactive");
     if (Tools.config.fb["active"] == 'true') {
-      String fbInterId = id
-          ? Tools.config.fb["inter1"]
-          : Tools.config.fb["inter2"];
+      String fbInterId =
+          id ? Tools.config.fb["inter1"] : Tools.config.fb["inter2"];
       loadFbInter(fbInterId);
     } else
       print("xxxxxxxxxxxxxxxxxxxxxxxxxxx Fb Ads inactive");
@@ -243,6 +244,7 @@ class AdsHelper {
   }
 
   Widget getFbBanner(String bannerId, banner.BannerSize size) {
+    bool filled = false;
     if (fbBannerAd == null) {
       fbBannerAd = Container(
         //margin: EdgeInsets.only(bottom: 5.0),
@@ -252,14 +254,18 @@ class AdsHelper {
           bannerSize: size,
           listener: (result, value) {
             print("===(Fb Banner)===> $value");
+            if (result == banner.BannerAdResult.LOADED) {
+              filled = true;
+            }
           },
         ),
       );
     }
-    return fbBannerAd;
+    return filled ? fbBannerAd : false;
   }
 
   Widget getFbNativeBanner(String nativeBannerId, NativeBannerAdSize size) {
+    bool filled = false;
     if (fbNativeBannerAd == null) {
       fbNativeBannerAd = Container(
         child: FacebookNativeAd(
@@ -275,17 +281,18 @@ class AdsHelper {
           buttonBorderColor: Colors.black,
           listener: (result, value) {
             print("===(Fb NativeBanner)===> $value");
-            if(result == NativeAdResult.ERROR){
-              return null;
+            if (result == NativeAdResult.LOADED) {
+              filled = true;
             }
           },
         ),
       );
     }
-    return fbNativeBannerAd;
+    return filled ? fbNativeBannerAd : false;
   }
 
   Widget getFbNative(String fbNativeId, double width, double height) {
+    bool filled = false;
     if (fbNativeAd == null) {
       fbNativeAd = FacebookNativeAd(
         placementId: fbNativeId,
@@ -300,13 +307,17 @@ class AdsHelper {
         buttonBorderColor: Colors.white,
         listener: (result, value) {
           print("================(Fb Native)==============> : --> $value");
+          if (result == NativeAdResult.LOADED) {
+            filled = true;
+          }
         },
       );
     }
-    return fbNativeAd;
+    return filled ? fbNativeAd : false;
   }
 
   Widget getAdmobBanner(String bannerId, AdmobBannerSize size) {
+    bool filled = false;
     if (admobBannerAd == null) {
       admobBannerAd = Container(
         child: AdmobBanner(
@@ -314,17 +325,18 @@ class AdsHelper {
           adSize: size,
           listener: (AdmobAdEvent event, Map<String, dynamic> args) {
             print("===(Admob Banner)===> result : $event =====> $args");
-            if (event == AdmobAdEvent.failedToLoad) {
-              return null;
+            if (event == AdmobAdEvent.loaded) {
+              filled = true;
             }
           },
         ),
       );
     }
-    return admobBannerAd;
+    return filled ? admobBannerAd : null;
   }
 
   Widget getAdmobNative(String admobNativeId, double width, double height) {
+    bool filled = false;
     admobNativeController.setTestDeviceIds([AdsHelper.testingId]);
 //    _controller.setNonPersonalizedAds(true);
     if (admobNativeAd == null) {
@@ -334,31 +346,26 @@ class AdsHelper {
         child: NativeAdmob(
           adUnitID: admobNativeId,
           loading: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
 //            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: CircularProgressIndicator(),
-              ),
-              Text(
-                "Loading Ad...",
-                style: TextStyle(color: MyColors.black.withOpacity(0.3)),
-              )
-            ],
-          )),
-          error: Center(
-              child: Text(
-            "Ad",
-            style: MyTextStyles.bigTitle
-                .apply(color: MyColors.black.withOpacity(0.3)),
-          )),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: CircularProgressIndicator(),
+                ),
+                Text(
+                  "Loading...",
+                  style: TextStyle(color: MyColors.black.withOpacity(0.3)),
+                )
+              ],
+            ),
+          ),
+          error: getStartAppBanner(),
           controller: admobNativeController,
           type: NativeAdmobType.full,
           options: NativeAdmobOptions(
             ratingColor: Colors.red,
-            // Others ...
           ),
         ),
       );
@@ -378,9 +385,8 @@ class AdsHelper {
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
     if (Tools.config.admob["active"] == 'true') {
-      String admobBannerId = id
-          ? Tools.config.admob["banner1"]
-          : Tools.config.admob["banner2"];
+      String admobBannerId =
+          id ? Tools.config.admob["banner1"] : Tools.config.admob["banner2"];
       return getAdmobBanner(admobBannerId, AdmobBannerSize.BANNER) ??
           getStartAppBanner();
     } else if (Tools.config.fb["active"] == 'true') {
@@ -399,15 +405,13 @@ class AdsHelper {
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
     if (Tools.config.admob["active"] == 'true') {
-      String admobNativeId = id
-          ? Tools.config.admob["native1"]
-          : Tools.config.admob["native2"];
-      return getAdmobNative(admobNativeId, height, width) ??
+      String admobNativeId =
+          id ? Tools.config.admob["native1"] : Tools.config.admob["native2"];
+      return  getAdmobNative(admobNativeId, height, width) ??
           getStartAppBanner();
     } else if (Tools.config.fb["active"] == 'true') {
-      String fbNativeId = id
-          ? Tools.config.fb["native1"]
-          : Tools.config.fb["native2"];
+      String fbNativeId =
+          id ? Tools.config.fb["native1"] : Tools.config.fb["native2"];
       return getFbNative(fbNativeId, height, width) ?? getStartAppBanner();
     } else {
       return getStartAppBanner();
@@ -419,9 +423,8 @@ class AdsHelper {
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
     if (Tools.config.admob["active"] == 'true') {
-      String admobNativeBannerId = id
-          ? Tools.config.admob["native1"]
-          : Tools.config.admob["native2"];
+      String admobNativeBannerId =
+          id ? Tools.config.admob["native1"] : Tools.config.admob["native2"];
       return getAdmobNative(admobNativeBannerId, 50.0, double.infinity) ??
           getStartAppBanner();
     } else if (Tools.config.fb["active"] == 'true') {

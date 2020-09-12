@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.myneighbour.hellogame"
+        applicationId "com.karimstoreappsfall.guysultimate"
         minSdkVersion 17
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
