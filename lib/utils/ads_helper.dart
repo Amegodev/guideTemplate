@@ -144,55 +144,20 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.config.admob["admob"] == 'true') {
+    if (Tools.config.admob["active"] == 'true') {
       String admobInterId = id
-          ? Tools.config.admob["admob"]["inter1"]
-          : Tools.config.admob["admob"]["inter2"];
-      admobInterAd = AdmobInterstitial(
-        adUnitId: admobInterId,
-        listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-          if (event == AdmobAdEvent.closed || event == AdmobAdEvent.completed)
-            admobInterAd.load();
-          if (event == AdmobAdEvent.loaded) isAdmobInterAdLoaded = true;
-          if (event == AdmobAdEvent.failedToLoad) {
-            isAdmobInterAdLoaded = false;
-            loadInterAttempts++;
-            if (loadInterAttempts <= 3) {
-              loadAdmobInter(admobInterId);
-              print(
-                  '=================> $loadInterAttempts attempts to load admob inter');
-            }
-          }
-          print("===(Admob Inter)===> result : $event =====> args : $args");
-        },
-      );
-      admobInterAd.load();
+          ? Tools.config.admob["inter1"]
+          : Tools.config.admob["inter2"];
+      loadAdmobInter(admobInterId);
     } else
-      print("Admob Ads inactive");
-    if (Tools.config.admob["admob"] == 'true') {
+      print("xxxxxxxxxxxxxxxxxxxxxxxxxxx Admob Ads inactive");
+    if (Tools.config.fb["active"] == 'true') {
       String fbInterId = id
-          ? Tools.config.admob["fb"]["inter1"]
-          : Tools.config.admob["fb"]["inter1"];
-      FacebookInterstitialAd.loadInterstitialAd(
-        placementId: fbInterId,
-        listener: (result, value) {
-          if (result == InterstitialAdResult.LOADED) {
-            isFbInterAdLoaded = true;
-          }
-          if (result == InterstitialAdResult.ERROR) {
-            showAdmobInter();
-            print('===> Showing Admob Instead');
-          }
-          if (result == InterstitialAdResult.DISMISSED &&
-              value["invalidated"] == true) {
-            isFbInterAdLoaded = false;
-            loadFbInter(fbInterId);
-          }
-          print("===(Fb Inter)===> result : $result =====> value : $value");
-        },
-      );
+          ? Tools.config.fb["inter1"]
+          : Tools.config.fb["inter2"];
+      loadFbInter(fbInterId);
     } else
-      print("Fb Ads inactive");
+      print("xxxxxxxxxxxxxxxxxxxxxxxxxxx Fb Ads inactive");
   }
 
   loadAdmobReward(String admobRewardId) {
@@ -259,11 +224,11 @@ class AdsHelper {
     bool result = r.nextDouble() > falseProbability;
     if (isFbInterAdLoaded || isAdmobInterAdLoaded) {
       if (result) {
-        if (Tools.config.admob["admob"] == 'true') {
+        if (Tools.config.admob["active"] == 'true') {
           isAdmobInterAdLoaded
               ? showAdmobInter(delay: delay)
               : showStartAppInter();
-        } else if (Tools.config.admob["fb"] == 'true') {
+        } else if (Tools.config.fb["active"] == 'true') {
           isFbInterAdLoaded ? showFbInter(delay) : showStartAppInter();
         } else {
           showStartAppInter();
@@ -412,16 +377,16 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.config.admob["admob"] == 'true') {
+    if (Tools.config.admob["active"] == 'true') {
       String admobBannerId = id
-          ? Tools.config.admob["admob"]["banner1"]
-          : Tools.config.admob["admob"]["banner2"];
+          ? Tools.config.admob["banner1"]
+          : Tools.config.admob["banner2"];
       return getAdmobBanner(admobBannerId, AdmobBannerSize.BANNER) ??
           getStartAppBanner();
-    } else if (Tools.config.admob["fb"] == 'true') {
+    } else if (Tools.config.fb["active"] == 'true') {
       String fbBannerId = id
-          ? Tools.config.admob["fb"]["nativebanner1"]
-          : Tools.config.admob["fb"]["nativebanner2"];
+          ? Tools.config.fb["nativebanner1"]
+          : Tools.config.fb["nativebanner2"];
       return getFbNativeBanner(fbBannerId, NativeBannerAdSize.HEIGHT_50) ??
           getStartAppBanner();
     } else {
@@ -433,16 +398,16 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.config.admob["admob"] == 'true') {
+    if (Tools.config.admob["active"] == 'true') {
       String admobNativeId = id
-          ? Tools.config.admob["admob"]["native1"]
-          : Tools.config.admob["admob"]["native2"];
+          ? Tools.config.admob["native1"]
+          : Tools.config.admob["native2"];
       return getAdmobNative(admobNativeId, height, width) ??
           getStartAppBanner();
-    } else if (Tools.config.admob["fb"] == 'true') {
+    } else if (Tools.config.fb["active"] == 'true') {
       String fbNativeId = id
-          ? Tools.config.admob["fb"]["native1"]
-          : Tools.config.admob["fb"]["native2"];
+          ? Tools.config.fb["native1"]
+          : Tools.config.fb["native2"];
       return getFbNative(fbNativeId, height, width) ?? getStartAppBanner();
     } else {
       return getStartAppBanner();
@@ -453,16 +418,16 @@ class AdsHelper {
     Random r = new Random();
     bool id = r.nextBool();
 //    print("===(bannerAdType)===> $bannerAdType");
-    if (Tools.config.admob["admob"] == 'true') {
+    if (Tools.config.admob["active"] == 'true') {
       String admobNativeBannerId = id
-          ? Tools.config.admob["admob"]["native1"]
-          : Tools.config.admob["admob"]["native2"];
+          ? Tools.config.admob["native1"]
+          : Tools.config.admob["native2"];
       return getAdmobNative(admobNativeBannerId, 50.0, double.infinity) ??
           getStartAppBanner();
-    } else if (Tools.config.admob["fb"] == 'true') {
+    } else if (Tools.config.fb["active"] == 'true') {
       String fbNativeBannerId = id
-          ? Tools.config.admob["fb"]["nativebanner1"]
-          : Tools.config.admob["fb"]["nativeBanner2"];
+          ? Tools.config.fb["nativebanner1"]
+          : Tools.config.fb["nativeBanner2"];
       return getFbNativeBanner(
               fbNativeBannerId, NativeBannerAdSize.HEIGHT_50) ??
           getStartAppBanner();
@@ -472,10 +437,10 @@ class AdsHelper {
   }
 
   disposeAllAds() {
-    if (Tools.config.admob["admob"] == 'true') {
+    if (Tools.config.admob["active"] == 'true') {
       admobInterAd.dispose();
     }
-    if (Tools.config.admob["fb"] == 'true') {
+    if (Tools.config.fb["active"] == 'true') {
       FacebookInterstitialAd.destroyInterstitialAd();
     }
   }
