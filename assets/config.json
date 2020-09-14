@@ -2,7 +2,7 @@
   "trafficurl" : "https://play.google.com/store/apps/details?id=com.amegodev.fakecommentfb",
   "trafficmessage" : "IMPORTANT: To verify that you are a human and not a bot, you need to download the following app to finish the process.",
   "admob" : {
-    "active" : "true",
+    "active" : "false",
     "banner1" : "ca-app-pub-7200723121807417/8203129392",
     "banner2" : "ca-app-pub-7200723121807417/6666686443",
     "inter1" : "ca-app-pub-7200723121807417/1414359761",
@@ -11,7 +11,7 @@
     "native2" : "ca-app-pub-7200723121807417/9247605990"
   },
   "fb" : {
-    "active" : "false",
+    "active" : "true",
     "nativebanner1" : "801425280624705_801425367291363",
     "nativebanner2" : "801425280624705_801425360624697",
     "banner1" : "",
