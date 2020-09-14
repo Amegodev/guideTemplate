@@ -261,7 +261,7 @@ class AdsHelper {
         ),
       );
     }
-    return filled ? fbBannerAd : false;
+    return filled ? fbBannerAd : null;
   }
 
   Widget getFbNativeBanner(String nativeBannerId, NativeBannerAdSize size) {
@@ -288,7 +288,7 @@ class AdsHelper {
         ),
       );
     }
-    return filled ? fbNativeBannerAd : false;
+    return filled ? fbNativeBannerAd : null;
   }
 
   Widget getFbNative(String fbNativeId, double width, double height) {
@@ -313,7 +313,7 @@ class AdsHelper {
         },
       );
     }
-    return filled ? fbNativeAd : false;
+    return filled ? fbNativeAd : null;
   }
 
   Widget getAdmobBanner(String bannerId, AdmobBannerSize size) {
@@ -407,7 +407,7 @@ class AdsHelper {
     if (Tools.config.admob["active"] == 'true') {
       String admobNativeId =
           id ? Tools.config.admob["native1"] : Tools.config.admob["native2"];
-      return  getAdmobNative(admobNativeId, height, width) ??
+      return getAdmobNative(admobNativeId, height, width) ??
           getStartAppBanner();
     } else if (Tools.config.fb["active"] == 'true') {
       String fbNativeId =
