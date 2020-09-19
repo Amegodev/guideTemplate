@@ -1,4 +1,4 @@
-package com.karimstoreappsfall.guysultimate
+package com.amegodev.giudetemplateremoteless
 
 import io.flutter.embedding.android.FlutterActivity
 
